@@ -18,7 +18,7 @@
     </div>
 
     <p style="margin-bottom:12px;">Die Abbildung zeigt das Netz eines Quaders mit den Maßen: Länge = 6 cm, Breite = 3 cm, Höhe = 10 cm.</p>
-    <canvas id="quaderNetCanvas" width="520" height="220" style="display:block;margin:0 auto 20px;"></canvas>
+    <img src="images/körpernetz1.png" alt="Körpernetz Quader" style="display:block;margin:0 auto 20px;max-width:520px;">
 
     <!-- 3a -->
     <div class="subtask" id="sub3a">
@@ -79,66 +79,6 @@
 </div>
 <script src="exam.js"></script>
 <script>
-// ── Draw Quader net ──
-// Quader: l=6, b=3, h=10
-// Net layout (cross-like):
-//   [top: 6×3]
-//   [left:3×10][front:6×10][right:3×10][back:6×10]
-//   [bottom:6×3]
-// gray shaded = right face = 3×10 = 30 cm²
-(function drawNet() {
-    const canvas = document.getElementById('quaderNetCanvas');
-    const ctx = canvas.getContext('2d');
-    const S = 14; // scale factor
-    const l = 6*S, b = 3*S, h = 10*S;
-    const ox = 60, oy = 20;
-
-    // Faces layout:
-    // Top (6×3): ox+b, oy
-    // Left (3×10): ox, oy+b
-    // Front (6×10): ox+b, oy+b
-    // Right (3×10): ox+b+l, oy+b  ← GRAY
-    // Back (6×10): ox+b+l+b, oy+b
-    // Bottom (6×3): ox+b, oy+b+h
-
-    const faces = [
-        { x: ox+b,       y: oy,      w: l, h: b, gray: false, label: '6×3' },
-        { x: ox,         y: oy+b,    w: b, h: h, gray: false, label: '3×10' },
-        { x: ox+b,       y: oy+b,    w: l, h: h, gray: false, label: '6×10' },
-        { x: ox+b+l,     y: oy+b,    w: b, h: h, gray: true,  label: '3×10' },
-        { x: ox+b+l+b,   y: oy+b,    w: l, h: h, gray: false, label: '6×10' },
-        { x: ox+b,       y: oy+b+h,  w: l, h: b, gray: false, label: '6×3' },
-    ];
-
-    faces.forEach(f => {
-        ctx.fillStyle = f.gray ? '#aaa' : '#e8e8e8';
-        ctx.fillRect(f.x, f.y, f.w, f.h);
-        ctx.strokeStyle = '#333';
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(f.x, f.y, f.w, f.h);
-    });
-
-    // Dimension labels on the right side
-    ctx.fillStyle = '#333';
-    ctx.font = '12px Arial';
-    ctx.textAlign = 'left';
-    const rx = ox + b + l + b + l + 10;
-    // 3 cm top
-    ctx.fillText('3 cm', rx, oy + b/2 + 4);
-    // 10 cm middle
-    ctx.fillText('10 cm', rx, oy + b + h/2 + 4);
-    // 3 cm bottom
-    ctx.fillText('3 cm', rx, oy + b + h + b/2 + 4);
-    // 6 cm below bottom face
-    ctx.textAlign = 'center';
-    ctx.fillText('6 cm', ox + b + l/2, oy + b + h + b + 16);
-
-    // Bracket lines for dimensions
-    ctx.strokeStyle = '#666';
-    ctx.lineWidth = 1;
-    function bracket(x1, y1, x2, y2, label) {}
-})();
-
 function submit3a() {
     const ts = getTaskState('A3a');
     const firstTry = !ts.submitted;
