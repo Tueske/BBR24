@@ -26,9 +26,7 @@
             <div class="subtask-label">a) Wie groß ist der Winkel γ? Berechnen Sie.</div>
             <div class="subtask-pts">(1 P)</div>
         </div>
-        <p style="font-size:0.92rem;color:#555;margin-bottom:8px;">
-            Hinweis: Die Winkelsumme im Dreieck beträgt 180°. Das Dreieck (Rasenfläche) hat zwei Winkel von je 25°.
-        </p>
+        
         <div class="work-area">
             <label>Lösungsweg:</label>
             <textarea id="work4a" rows="2" placeholder=""></textarea>
@@ -47,10 +45,7 @@
             <div class="subtask-label">b) Wie groß ist der Flächeninhalt der Rasenfläche? Berechnen Sie.</div>
             <div class="subtask-pts">(2 P)</div>
         </div>
-        <p style="font-size:0.92rem;color:#555;margin-bottom:8px;">
-            Hinweis: Die Rasenfläche ist ein Dreieck mit Grundlinie 30 m. Die Höhe ergibt sich aus dem Dreieck (Basis CA = 30 m, Winkel bei C und A = je 25°).
-            Die Höhe des Rasendreiecks beträgt ca. 7 m (aus dem Bild ablesbar: Punkt B liegt 7 m über der Grundlinie).
-        </p>
+        
         <div class="work-area">
             <label>Lösungsweg:</label>
             <textarea id="work4b" rows="3" placeholder=""></textarea>
@@ -69,12 +64,7 @@
             <div class="subtask-label">c)* Wie groß ist der Umfang der mit Steinen gepflasterten Fläche? Berechnen Sie.</div>
             <div class="subtask-pts">(3 P)</div>
         </div>
-        <p style="font-size:0.92rem;color:#555;margin-bottom:8px;">
-            Hinweis: Die Steinfläche ist ein Dreieck mit den Seiten: 7 m (links), 15 m (oben) und der gemeinsamen Seite mit der Rasenfläche (von C nach B).
-            Die Seite CB kann mit dem Satz des Pythagoras berechnet werden (rechter Winkel beim Schnittpunkt von h und CB).
-            Alternativ: Die Grundlinie der Steinfläche liegt auf CA, die Breite beträgt 15 m und die Höhe 7 m.
-            Seite CB ≈ √(15² + 7²) = √(225+49) = √274 ≈ 16,55 m.
-        </p>
+       
         <div class="work-area">
             <label>Lösungsweg:</label>
             <textarea id="work4c" rows="4" placeholder=""></textarea>
@@ -232,6 +222,12 @@
     ctx.fillStyle = '#444';
     ctx.textAlign = 'center';
     ctx.fillText('γ', B.x + 12, B.y + 12);
+
+    // Right angle marker at P (top-left 90°)
+    const cornerSize = 8;
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(P.x, P.y, cornerSize, cornerSize);
 
     // Labels inside areas
     ctx.font = 'bold 13px Arial';
