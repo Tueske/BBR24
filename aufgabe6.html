@@ -17,9 +17,12 @@
         <span class="pts-badge">6 Punkte</span>
     </div>
 
-    <p style="margin-bottom:12px;">Der Strom für Berlin wird aus verschiedenen Energieträgern erzeugt. Die folgende Tabelle zeigt die Angaben für das Jahr 2020.</p>
+    <p style="margin-bottom:12px;">
+        Der Strom für Berlin wird aus verschiedenen Energieträgern erzeugt.
+        Die folgende Tabelle zeigt die Angaben für das Jahr 2020.
+    </p>
 
-    <table style="max-width:420px;margin-bottom:16px;">
+    <table style="max-width:440px;margin-bottom:20px;">
         <thead>
             <tr><th style="text-align:left;">Energieträger</th><th>Strommenge</th></tr>
         </thead>
@@ -33,327 +36,602 @@
         </tbody>
     </table>
 
-    <!-- 6a: Balkendiagramm -->
+    <!-- ── 6a : Balkendiagramm ───────────────────────────────────────── -->
     <div class="subtask" id="sub6a">
         <div class="subtask-header">
-            <div class="subtask-label">a) Ergänzen Sie den Balken für „Steinkohle" und beschriften Sie die x-Achse.</div>
+            <div class="subtask-label">
+                a) Ergänzen Sie den Balken für „Steinkohle" und beschriften Sie die x-Achse.
+            </div>
             <div class="subtask-pts">(2 P)</div>
         </div>
-        <p style="font-size:0.9rem;color:#555;margin-bottom:8px;">
-            Ziehen Sie den Schieberegler, um den Balken für Steinkohle auf den richtigen Wert zu setzen. Tragen Sie außerdem die Achsenbeschriftung ein.
+        <p style="font-size:0.9rem;color:#555;margin-bottom:10px;">
+            Ziehen Sie den Schieberegler, um den Steinkohle-Balken auf den richtigen Wert zu setzen.
+            Tragen Sie anschließend die Achsenbeschriftung ein.
         </p>
-        <canvas id="barCanvas" width="540" height="280" style="display:block;margin:0 auto;border:1px solid #ddd;border-radius:4px;"></canvas>
-        <div style="margin:10px 0;">
-            <label>Steinkohle-Wert (GWh): <input type="range" id="steinkohleSlider" min="0" max="5000" value="0" step="10" oninput="updateBarChart()"> <span id="steinkohleVal">0</span> GWh</label>
+
+        <canvas id="barCanvas" width="540" height="280"
+                style="display:block;margin:0 auto 12px;border:1px solid #ddd;border-radius:4px;"></canvas>
+
+        <div style="margin:8px 0 12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <label style="font-weight:bold;">Steinkohle:</label>
+            <input type="range" id="steinkohleSlider"
+                   min="0" max="5000" value="0" step="10"
+                   oninput="updateBarChart()">
+            <span id="steinkohleVal"
+                  style="min-width:70px;font-weight:bold;">0 GWh</span>
         </div>
+
         <div class="input-row">
-            <label>Beschriftung x-Achse:</label>
-            <input type="text" id="in6a_axis" placeholder="z.B. Strommenge in GWh" style="max-width:280px;">
+            <label>Beschriftung&nbsp;x-Achse:</label>
+            <input type="text" id="in6a_axis"
+                   placeholder='z.B. „Strommenge in GWh"'
+                   style="max-width:280px;">
         </div>
+
         <button class="submit-btn" id="btn6a" onclick="submit6a()">Antwort prüfen</button>
         <div class="feedback" id="fb6a"></div>
     </div>
 
-    <!-- 6b -->
+    <!-- ── 6b : Prozentrechnung ──────────────────────────────────────── -->
     <div class="subtask" id="sub6b">
         <div class="subtask-header">
-            <div class="subtask-label">b) Wie viel Prozent des 2020 erzeugten Stromes stammten aus erneuerbaren Energieträgern? Berechnen Sie.</div>
+            <div class="subtask-label">
+                b) Wie viel Prozent des 2020 erzeugten Stromes stammten aus
+                erneuerbaren Energieträgern? Berechnen Sie.
+            </div>
             <div class="subtask-pts">(2 P)</div>
         </div>
         <div class="work-area">
-            <label>Lösungsweg:</label>
-            <textarea id="work6b" rows="3" placeholder=""></textarea>
+            <label>Lösungsweg / Rechnung:</label>
+            <textarea id="work6b" rows="3"
+                      placeholder="405 / 7291 × 100 = ..."></textarea>
         </div>
         <div class="input-row">
-            <label>Anteil ≈</label>
-            <input type="text" id="in6b" placeholder="?"> %
+            <label>Anteil&nbsp;≈</label>
+            <input type="text" id="in6b" placeholder="?" style="width:100px;"> %
         </div>
         <button class="submit-btn" id="btn6b" onclick="submit6b()">Antwort prüfen</button>
         <div class="feedback" id="fb6b"></div>
     </div>
 
-    <!-- 6c*: Kreisdiagramm -->
+    <!-- ── 6c* : Kreisdiagramm ───────────────────────────────────────── -->
     <div class="subtask star-task" id="sub6c">
         <div class="subtask-header">
-            <div class="subtask-label">c)* Die Aufteilung der erneuerbaren Energien soll in einem Kreisdiagramm dargestellt werden. Ergänzen Sie die fehlenden Anteile (Photovoltaik und Biomasse) und beschriften Sie.</div>
+            <div class="subtask-label">
+                c)* Die Aufteilung der erneuerbaren Energien soll in einem
+                Kreisdiagramm dargestellt werden.<br>
+                Von den 405 GWh erneuerbarer Energie stammen:<br>
+                &nbsp;&nbsp;• 7 % aus Windkraft<br>
+                &nbsp;&nbsp;• 25 % aus Photovoltaik<br>
+                &nbsp;&nbsp;• 68 % aus Biomasse<br><br>
+                Ergänzen Sie die beiden fehlenden Sektoren (Photovoltaik und
+                Biomasse). Der Windkraft-Sektor ist bereits eingezeichnet.
+            </div>
             <div class="subtask-pts">(2 P)</div>
         </div>
-        <p style="font-size:0.9rem;color:#555;margin-bottom:8px;">
-            Windkraft: 7% (bereits eingezeichnet). Tragen Sie die Winkel für Photovoltaik (25%) und Biomasse (68%) ein, indem Sie die Schieberegler verstellen.
-        </p>
-        <canvas id="pieCanvas" width="400" height="300" style="display:block;margin:0 auto;border:1px solid #ddd;border-radius:4px;"></canvas>
-        <div style="margin:10px 0;display:flex;flex-direction:column;gap:8px;">
-            <label>Photovoltaik-Anteil (%): <input type="range" id="pvSlider" min="0" max="60" value="0" step="1" oninput="updatePie()"> <span id="pvVal">0</span>%</label>
-            <label>Biomasse-Anteil (%): <input type="range" id="bmSlider" min="0" max="100" value="0" step="1" oninput="updatePie()"> <span id="bmVal">0</span>%</label>
+
+        <!-- Conversion reminder -->
+        <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:6px;
+                    padding:12px 16px;margin-bottom:14px;font-size:0.92rem;">
+            <strong>Hinweis – Prozent in Grad umrechnen:</strong><br>
+            Ein voller Kreis = 360°. Der Winkel eines Sektors =
+            <em>Anteil&thinsp;%&thinsp;×&thinsp;3,6</em><br>
+            Beispiel Windkraft: 7&thinsp;%&thinsp;×&thinsp;3,6 =
+            <strong>25,2°</strong> (bereits eingezeichnet)
         </div>
-        <button class="submit-btn" id="btn6c" onclick="submit6c()">Antwort prüfen</button>
+
+        <!-- Conversion helper table (student fills in) -->
+        <div style="margin-bottom:14px;overflow-x:auto;">
+        <table style="max-width:480px;">
+            <thead>
+                <tr>
+                    <th>Energieart</th>
+                    <th>Anteil&nbsp;(%)</th>
+                    <th>Formel</th>
+                    <th>Winkel&nbsp;(°)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background:#f5f5f5;">
+                    <td>Windkraft</td>
+                    <td>7&thinsp;%</td>
+                    <td>7&thinsp;×&thinsp;3,6</td>
+                    <td><strong>25,2°</strong> <em>(gegeben)</em></td>
+                </tr>
+                <tr>
+                    <td>Photovoltaik</td>
+                    <td>25&thinsp;%</td>
+                    <td>25&thinsp;×&thinsp;3,6</td>
+                    <td>
+                        <input type="number" id="pv_deg_input"
+                               min="0" max="360" placeholder="?°"
+                               style="width:72px;" oninput="syncSliderFromInput('pv')">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Biomasse</td>
+                    <td>68&thinsp;%</td>
+                    <td>68&thinsp;×&thinsp;3,6</td>
+                    <td>
+                        <input type="number" id="bm_deg_input"
+                               min="0" max="360" placeholder="?°"
+                               style="width:72px;" oninput="syncSliderFromInput('bm')">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <!-- Sliders (degrees) -->
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <label style="min-width:130px;font-weight:bold;color:#f5a623;">
+                    Photovoltaik:
+                </label>
+                <input type="range" id="pvSlider"
+                       min="0" max="360" value="0" step="1"
+                       oninput="syncInputFromSlider('pv')">
+                <span id="pvDegDisplay"
+                      style="min-width:60px;font-weight:bold;">0°</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <label style="min-width:130px;font-weight:bold;color:#4a8a4a;">
+                    Biomasse:
+                </label>
+                <input type="range" id="bmSlider"
+                       min="0" max="360" value="0" step="1"
+                       oninput="syncInputFromSlider('bm')">
+                <span id="bmDegDisplay"
+                      style="min-width:60px;font-weight:bold;">0°</span>
+            </div>
+        </div>
+
+        <!-- Sum display -->
+        <div id="degSumDisplay"
+             style="font-size:0.9rem;margin-bottom:10px;padding:6px 12px;
+                    background:#f5f5f5;border-radius:4px;display:inline-block;">
+            Summe aller Winkel: <strong id="degSumVal">25,2°</strong>
+            (Ziel: 360°)
+        </div>
+
+        <!-- Pie canvas -->
+        <canvas id="pieCanvas" width="460" height="320"
+                style="display:block;margin:0 auto;border:1px solid #ddd;border-radius:4px;">
+        </canvas>
+
+        <button class="submit-btn" id="btn6c" onclick="submit6c()"
+                style="margin-top:14px;">Antwort prüfen</button>
         <div class="feedback" id="fb6c"></div>
-    </div>
+    </div><!-- end subtask -->
 
     <div class="nav-footer">
         <a href="aufgabe5.html">← Aufgabe 5</a>
         <a href="aufgabe7.html">Aufgabe 7 →</a>
     </div>
-</div>
+</div><!-- end task-page -->
+
 <script src="exam.js"></script>
 <script>
-// ── Bar Chart ──
+'use strict';
+
+/* ═══════════════════════════════════════════════════════════════════
+   CONSTANTS
+═══════════════════════════════════════════════════════════════════ */
+// Correct degree values (% × 3.6)
+const WIND_DEG = 7  * 3.6;   // 25.2°
+const PV_DEG   = 25 * 3.6;   // 90°
+const BM_DEG   = 68 * 3.6;   // 244.8°
+const TOL_DEG  = 4;           // ±4° tolerance
+
+/* ═══════════════════════════════════════════════════════════════════
+   BAR CHART  (6a)
+═══════════════════════════════════════════════════════════════════ */
 const BAR_DATA = [
-    { label: 'Erdgas',                    val: 4516, color: '#555' },
-    { label: 'Steinkohle',                val: 1937, color: '#888', user: true },
-    { label: 'Heizöl',                    val: 18,   color: '#aaa' },
-    { label: 'Sonstige fossile',          val: 415,  color: '#777' },
-    { label: 'Erneuerbare',              val: 405,  color: '#4a4' },
+    { label: 'Erdgas',                   val: 4516, color: '#555',   user: false },
+    { label: 'Steinkohle',               val: 1937, color: '#7a7a7a',user: true  },
+    { label: 'Heizöl',                   val: 18,   color: '#aaa',   user: false },
+    { label: 'Sonstige fossile',         val: 415,  color: '#777',   user: false },
+    { label: 'Erneuerbare Energieträger',val: 405,  color: '#4a8a4a',user: false },
 ];
 
 let steinkohleUserVal = 0;
 
 function updateBarChart() {
     steinkohleUserVal = parseInt(document.getElementById('steinkohleSlider').value);
-    document.getElementById('steinkohleVal').textContent = steinkohleUserVal;
+    document.getElementById('steinkohleVal').textContent = steinkohleUserVal + ' GWh';
     drawBarChart();
 }
 
 function drawBarChart() {
     const canvas = document.getElementById('barCanvas');
-    const ctx = canvas.getContext('2d');
+    const ctx    = canvas.getContext('2d');
     const W = canvas.width, H = canvas.height;
     ctx.clearRect(0, 0, W, H);
 
-    const PAD = { left: 160, right: 20, top: 30, bottom: 40 };
-    const chartW = W - PAD.left - PAD.right;
-    const chartH = H - PAD.top - PAD.bottom;
+    const PAD     = { left: 175, right: 30, top: 36, bottom: 44 };
+    const chartW  = W - PAD.left - PAD.right;
+    const chartH  = H - PAD.top  - PAD.bottom;
     const MAX_VAL = 5000;
-    const BAR_H = 30, BAR_GAP = 14;
+    const BAR_H   = 28;
+    const BAR_GAP = 12;
 
     // Title
-    ctx.fillStyle = '#333';
-    ctx.font = 'bold 13px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('So produziert Berlin Strom', W / 2, 18);
+    ctx.fillStyle   = '#333';
+    ctx.font        = 'bold 13px Arial';
+    ctx.textAlign   = 'center';
+    ctx.fillText('So produziert Berlin Strom (2020)', W / 2, 20);
 
     // Bars
     BAR_DATA.forEach((d, i) => {
-        const y = PAD.top + i * (BAR_H + BAR_GAP);
+        const y          = PAD.top + i * (BAR_H + BAR_GAP);
         const displayVal = d.user ? steinkohleUserVal : d.val;
-        const barW = (displayVal / MAX_VAL) * chartW;
+        const barW       = (displayVal / MAX_VAL) * chartW;
 
-        ctx.fillStyle = d.color;
-        ctx.fillRect(PAD.left, y, barW, BAR_H);
+        // bar fill
+        ctx.fillStyle = d.user && steinkohleUserVal === 0 ? '#ddd' : d.color;
+        ctx.fillRect(PAD.left, y, Math.max(barW, 0), BAR_H);
 
-        // Label
-        ctx.fillStyle = '#333';
-        ctx.font = '12px Arial';
-        ctx.textAlign = 'right';
-        ctx.fillText(d.label, PAD.left - 6, y + BAR_H / 2 + 4);
+        // dashed outline for user bar when empty
+        if (d.user && steinkohleUserVal === 0) {
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = '#aaa';
+            ctx.lineWidth   = 1.5;
+            ctx.strokeRect(PAD.left, y, 80, BAR_H);
+            ctx.setLineDash([]);
+        }
 
-        // Value
+        // row label
+        ctx.fillStyle  = '#333';
+        ctx.font       = '12px Arial';
+        ctx.textAlign  = 'right';
+        ctx.fillText(d.label, PAD.left - 8, y + BAR_H / 2 + 4);
+
+        // value label
         if (displayVal > 0) {
             ctx.fillStyle = '#333';
             ctx.textAlign = 'left';
-            ctx.font = '11px Arial';
-            ctx.fillText(displayVal + ' GWh', PAD.left + barW + 4, y + BAR_H / 2 + 4);
+            ctx.font      = '11px Arial';
+            ctx.fillText(displayVal + ' GWh', PAD.left + barW + 5, y + BAR_H / 2 + 4);
         }
     });
 
-    // x-axis
-    ctx.strokeStyle = '#333';
-    ctx.lineWidth = 1.5;
+    // x-axis line
     const axisY = PAD.top + BAR_DATA.length * (BAR_H + BAR_GAP);
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth   = 1.5;
     ctx.beginPath();
     ctx.moveTo(PAD.left, axisY);
     ctx.lineTo(W - PAD.right, axisY);
     ctx.stroke();
 
-    // x ticks
+    // x ticks + numbers
     for (let v = 0; v <= MAX_VAL; v += 500) {
         const px = PAD.left + (v / MAX_VAL) * chartW;
         ctx.beginPath();
         ctx.moveTo(px, axisY);
         ctx.lineTo(px, axisY + 5);
+        ctx.strokeStyle = '#555';
+        ctx.lineWidth   = 1;
         ctx.stroke();
-        ctx.fillStyle = '#333';
-        ctx.font = '11px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(v, px, axisY + 17);
+        ctx.fillStyle  = '#444';
+        ctx.font       = '11px Arial';
+        ctx.textAlign  = 'center';
+        ctx.fillText(v, px, axisY + 18);
     }
 
-    // x-axis label placeholder
-    ctx.fillStyle = '#c00';
-    ctx.font = 'italic 11px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('← Achsenbeschriftung (unten eingeben)', PAD.left + chartW / 2, H - 4);
+    // placeholder for axis label
+    ctx.fillStyle  = '#b00';
+    ctx.font       = 'italic 11px Arial';
+    ctx.textAlign  = 'center';
+    ctx.fillText('↑ Achsenbeschriftung unten eingeben', PAD.left + chartW / 2, H - 4);
 }
 
 drawBarChart();
 
-// ── Pie Chart ──
-let pvPct = 0, bmPct = 0;
-const WIND_PCT = 7;
+/* ═══════════════════════════════════════════════════════════════════
+   PIE CHART  (6c)
+═══════════════════════════════════════════════════════════════════ */
+let pvDeg = 0;
+let bmDeg = 0;
 
-function updatePie() {
-    pvPct = parseInt(document.getElementById('pvSlider').value);
-    bmPct = parseInt(document.getElementById('bmSlider').value);
-    document.getElementById('pvVal').textContent = pvPct;
-    document.getElementById('bmVal').textContent = bmPct;
+/** Keep slider ↔ number-input in sync for 'pv' or 'bm'. */
+function syncInputFromSlider(which) {
+    const slider = document.getElementById(which + 'Slider');
+    const input  = document.getElementById(which + '_deg_input');
+    const disp   = document.getElementById(which + 'DegDisplay');
+    const val    = parseInt(slider.value);
+    input.value  = val;
+    disp.textContent = val + '°';
+    if (which === 'pv') pvDeg = val; else bmDeg = val;
+    updateSumDisplay();
     drawPie();
+}
+
+function syncSliderFromInput(which) {
+    const input  = document.getElementById(which + '_deg_input');
+    const slider = document.getElementById(which + 'Slider');
+    const disp   = document.getElementById(which + 'DegDisplay');
+    let val = parseInt(input.value);
+    if (isNaN(val)) val = 0;
+    val = Math.max(0, Math.min(360, val));
+    slider.value     = val;
+    disp.textContent = val + '°';
+    if (which === 'pv') pvDeg = val; else bmDeg = val;
+    updateSumDisplay();
+    drawPie();
+}
+
+function updateSumDisplay() {
+    const total   = WIND_DEG + pvDeg + bmDeg;
+    const el      = document.getElementById('degSumVal');
+    const wrapper = document.getElementById('degSumDisplay');
+    el.textContent = total.toFixed(1) + '°';
+    wrapper.style.background = Math.abs(total - 360) < 6 ? '#e8f5e9' : '#f5f5f5';
+    wrapper.style.borderLeft = Math.abs(total - 360) < 6
+        ? '3px solid #4caf50' : '3px solid transparent';
 }
 
 function drawPie() {
     const canvas = document.getElementById('pieCanvas');
-    const ctx = canvas.getContext('2d');
+    const ctx    = canvas.getContext('2d');
     const W = canvas.width, H = canvas.height;
     ctx.clearRect(0, 0, W, H);
 
-    const cx = 160, cy = H / 2, r = 110;
-    const remaining = 100 - WIND_PCT - pvPct - bmPct;
+    const cx = 155, cy = H / 2, r = 120;
+
+    // Segments: wind (given), pv (user), bm (user), remainder
+    const total     = WIND_DEG + pvDeg + bmDeg;
+    const remainder = Math.max(0, 360 - total);
 
     const segments = [
-        { pct: WIND_PCT, color: '#888',   label: 'Windkraft 7%' },
-        { pct: pvPct,    color: '#f5a623', label: `Photovoltaik ${pvPct}%` },
-        { pct: bmPct,    color: '#4a8a4a', label: `Biomasse ${bmPct}%` },
-        { pct: Math.max(0, remaining), color: '#eee', label: remaining > 0 ? `Offen ${remaining}%` : '' },
+        { deg: WIND_DEG,  color: '#888',    label: 'Windkraft',    pct: '7 %',  given: true  },
+        { deg: pvDeg,     color: '#f5a623', label: 'Photovoltaik', pct: '25 %', given: false },
+        { deg: bmDeg,     color: '#4a8a4a', label: 'Biomasse',     pct: '68 %', given: false },
+        { deg: remainder, color: '#e0e0e0', label: '',             pct: '',     given: false },
     ];
 
-    let startAngle = -Math.PI / 2;
+    // Draw segments
+    let startAngle = -Math.PI / 2; // start at 12 o'clock
     segments.forEach(seg => {
-        if (seg.pct <= 0) return;
-        const angle = (seg.pct / 100) * Math.PI * 2;
+        if (seg.deg <= 0) return;
+        const sweep = (seg.deg / 360) * Math.PI * 2;
+
         ctx.beginPath();
         ctx.moveTo(cx, cy);
-        ctx.arc(cx, cy, r, startAngle, startAngle + angle);
+        ctx.arc(cx, cy, r, startAngle, startAngle + sweep);
         ctx.closePath();
         ctx.fillStyle = seg.color;
         ctx.fill();
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth   = 2;
         ctx.stroke();
 
-        // Label line
-        const midAngle = startAngle + angle / 2;
-        const lx = cx + Math.cos(midAngle) * (r + 20);
-        const ly = cy + Math.sin(midAngle) * (r + 20);
-        ctx.strokeStyle = '#555';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(cx + Math.cos(midAngle) * r, cy + Math.sin(midAngle) * r);
-        ctx.lineTo(lx, ly);
-        ctx.stroke();
+        // Label inside sector if large enough
+        if (seg.deg > 15) {
+            const mid   = startAngle + sweep / 2;
+            const lx    = cx + Math.cos(mid) * r * 0.62;
+            const ly    = cy + Math.sin(mid) * r * 0.62;
+            ctx.fillStyle  = seg.given ? '#fff' : (seg.color === '#e0e0e0' ? '#999' : '#fff');
+            ctx.font       = 'bold 11px Arial';
+            ctx.textAlign  = 'center';
+            ctx.fillText(seg.deg.toFixed(1) + '°', lx, ly);
+        }
 
-        startAngle += angle;
+        startAngle += sweep;
     });
 
-    // Legend
-    const legendX = cx + r + 30, legendY = 60;
-    ctx.font = '12px Arial';
-    segments.forEach((seg, i) => {
-        if (!seg.label) return;
-        ctx.fillStyle = seg.color;
-        ctx.fillRect(legendX, legendY + i * 24, 16, 16);
-        ctx.fillStyle = '#333';
-        ctx.textAlign = 'left';
-        ctx.fillText(seg.label, legendX + 22, legendY + i * 24 + 12);
+    // Outer ring border
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = '#999';
+    ctx.lineWidth   = 1.5;
+    ctx.stroke();
+
+    // ── Legend ──────────────────────────────────────────────────────
+    const legendX = cx + r + 24;
+    const legendY = cy - 90;
+    const items   = [
+        { color: '#888',    label: 'Windkraft',    deg: WIND_DEG, given: true  },
+        { color: '#f5a623', label: 'Photovoltaik', deg: pvDeg,    given: false },
+        { color: '#4a8a4a', label: 'Biomasse',     deg: bmDeg,    given: false },
+    ];
+
+    items.forEach((item, i) => {
+        const y = legendY + i * 52;
+
+        // colour box
+        ctx.fillStyle   = item.color;
+        ctx.fillRect(legendX, y, 18, 18);
+        ctx.strokeStyle = '#666';
+        ctx.lineWidth   = 1;
+        ctx.strokeRect(legendX, y, 18, 18);
+
+        // name
+        ctx.fillStyle  = '#222';
+        ctx.font       = 'bold 12px Arial';
+        ctx.textAlign  = 'left';
+        ctx.fillText(item.label + (item.given ? ' (gegeben)' : ''), legendX + 24, y + 13);
+
+        // degree value
+        ctx.font      = '12px Arial';
+        ctx.fillStyle = '#555';
+        ctx.fillText(
+            item.deg > 0 ? item.deg.toFixed(1) + '°' : '—',
+            legendX + 24, y + 28
+        );
     });
 
-    // Remaining warning
-    if (remaining < 0) {
-        ctx.fillStyle = '#c00';
-        ctx.font = 'bold 12px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Summe > 100%!', cx, cy + r + 30);
+    // ── Warning if sum > 360 ─────────────────────────────────────────
+    if (total > 360 + 1) {
+        ctx.fillStyle  = '#c00';
+        ctx.font       = 'bold 12px Arial';
+        ctx.textAlign  = 'center';
+        ctx.fillText('⚠ Summe > 360° !', cx, cy + r + 22);
+    }
+
+    // ── "Remainder" label ────────────────────────────────────────────
+    if (remainder > 5) {
+        const mid   = -Math.PI / 2 + ((WIND_DEG + pvDeg + bmDeg) / 360) * Math.PI * 2
+                      + (remainder / 360) * Math.PI;
+        const lx    = cx + Math.cos(mid) * r * 0.65;
+        const ly    = cy + Math.sin(mid) * r * 0.65;
+        ctx.fillStyle  = '#999';
+        ctx.font       = '10px Arial';
+        ctx.textAlign  = 'center';
+        ctx.fillText('noch offen', lx, ly);
     }
 }
-drawPie();
 
-// ── Submissions ──
+drawPie();
+updateSumDisplay();
+
+/* ═══════════════════════════════════════════════════════════════════
+   SUBMISSIONS
+═══════════════════════════════════════════════════════════════════ */
+
 function saveFb(id, fbId, btnId, correct, firstTry, pts, msg) {
-    const ts = getTaskState(id);
-    const earnedPts = firstTry && correct ? pts : (ts.points || 0);
-    const badge = correct && earnedPts > 0 ? ` <span class="points-earned">+${earnedPts} Punkt${earnedPts!==1?'e':''}</span>` : '';
-    const fbText = (correct ? '✓ ' : '✗ ') + msg + badge;
-    setTaskState(id, { submitted: true, correct, points: earnedPts, feedbackText: fbText });
-    const fb = document.getElementById(fbId);
-    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
-    fb.innerHTML = fbText;
-    fb.style.display = 'block';
+    const ts      = getTaskState(id);
+    const earned  = firstTry && correct ? pts : (ts.points || 0);
+    const badge   = correct && earned > 0
+        ? ` <span class="points-earned">+${earned}&thinsp;Punkt${earned !== 1 ? 'e' : ''}</span>`
+        : '';
+    const fbText  = (correct ? '✓ ' : '✗ ') + msg + badge;
+    setTaskState(id, { submitted: true, correct, points: earned, feedbackText: fbText });
+    const fbEl    = document.getElementById(fbId);
+    fbEl.className      = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fbEl.innerHTML      = fbText;
+    fbEl.style.display  = 'block';
+    if (correct) {
+        const btn = document.getElementById(btnId);
+        if (btn) btn.disabled = true;
+    }
 }
 
+// ── 6a ──────────────────────────────────────────────────────────────
 function submit6a() {
-    const ts = getTaskState('A6a');
+    const ts       = getTaskState('A6a');
     const firstTry = !ts.submitted;
+
     const sliderOk = approxEqual(steinkohleUserVal, 1937, 50);
-    const axisText = document.getElementById('in6a_axis').value.trim().toLowerCase();
-    const axisOk = axisText.length > 4 && (axisText.includes('gwh') || axisText.includes('strom') || axisText.includes('menge'));
+    const axisRaw  = document.getElementById('in6a_axis').value.trim().toLowerCase();
+    const axisOk   = axisRaw.length >= 4 &&
+                     (axisRaw.includes('gwh') ||
+                      axisRaw.includes('strom') ||
+                      axisRaw.includes('menge') ||
+                      axisRaw.includes('watt'));
+
     const correct = sliderOk && axisOk;
     let msg;
     if (correct) {
-        msg = 'Richtig! Steinkohle: 1937 GWh. Die x-Achse zeigt die Strommenge in GWh.';
+        msg = 'Richtig! Steinkohle: 1937 GWh. Die x-Achse ist korrekt beschriftet.';
     } else {
-        let h = [];
-        if (!sliderOk) h.push('Schieberegler: Steinkohle hat 1937 GWh — setzen Sie den Balken auf diesen Wert.');
-        if (!axisOk)   h.push('x-Achse: Beschriften Sie die Achse z.B. mit „Strommenge in GWh".');
+        const h = [];
+        if (!sliderOk) h.push('Schieberegler: Steinkohle hat 1937 GWh – '
+            + 'setzen Sie den Balken genau auf diesen Wert.');
+        if (!axisOk)   h.push('x-Achse: Beschriften Sie die Achse '
+            + '(z.&nbsp;B. „Strommenge in GWh").');
         msg = h.join(' | ');
     }
-    saveFb('A6a','fb6a','btn6a', correct, firstTry, correct&&firstTry?2:0, msg);
-    if (correct) document.getElementById('btn6a').disabled = true;
+    saveFb('A6a', 'fb6a', 'btn6a', correct, firstTry, correct && firstTry ? 2 : 0, msg);
 }
 
+// ── 6b ──────────────────────────────────────────────────────────────
 function submit6b() {
-    const ts = getTaskState('A6b');
+    const ts       = getTaskState('A6b');
     const firstTry = !ts.submitted;
-    const val = parseGerman(document.getElementById('in6b').value);
-    // 405/7291*100 ≈ 5.55%
-    const correct = approxEqual(val, 405 / 7291 * 100, 0.2);
+    const val      = parseGerman(document.getElementById('in6b').value);
+    // 405 / 7291 × 100 ≈ 5.55 %
+    const correct  = approxEqual(val, 405 / 7291 * 100, 0.2);
     const msg = correct
-        ? 'Richtig! 405 / 7291 × 100 ≈ 5,55 %'
-        : 'Nicht korrekt. Tipp: Anteil = (Erneuerbare / Gesamt) × 100 = (405 / 7291) × 100';
-    saveFb('A6b','fb6b','btn6b', correct, firstTry, correct&&firstTry?2:0, msg);
-    if (correct) document.getElementById('btn6b').disabled = true;
+        ? 'Richtig! 405&thinsp;÷&thinsp;7291&thinsp;×&thinsp;100 ≈ 5,55&thinsp;%'
+        : 'Nicht korrekt. Tipp: Anteil = (Erneuerbare ÷ Gesamt) × 100 '
+          + '= (405 ÷ 7291) × 100';
+    saveFb('A6b', 'fb6b', 'btn6b', correct, firstTry, correct && firstTry ? 2 : 0, msg);
 }
 
+// ── 6c ──────────────────────────────────────────────────────────────
+// Correct degree values: PV = 90°, BM = 244.8°
 function submit6c() {
-    const ts = getTaskState('A6c');
+    const ts       = getTaskState('A6c');
     const firstTry = !ts.submitted;
-    const pvOk = approxEqual(pvPct, 25, 2);
-    const bmOk = approxEqual(bmPct, 68, 2);
+
+    const pvOk = approxEqual(pvDeg, PV_DEG, TOL_DEG);   // 90° ± 4
+    const bmOk = approxEqual(bmDeg, BM_DEG, TOL_DEG);   // 244.8° ± 4
+
     const correct = pvOk && bmOk;
     let msg;
     if (correct) {
-        msg = 'Richtig! Windkraft: 7%, Photovoltaik: 25%, Biomasse: 68%. Summe = 100%.';
+        msg = 'Richtig! '
+            + 'Photovoltaik: 25&thinsp;%&thinsp;×&thinsp;3,6 = <strong>90°</strong> | '
+            + 'Biomasse: 68&thinsp;%&thinsp;×&thinsp;3,6 = <strong>244,8°</strong> | '
+            + 'Windkraft: 7&thinsp;%&thinsp;×&thinsp;3,6 = 25,2° '
+            + '→ Summe = 360°';
     } else {
-        let h = [];
-        if (!pvOk) h.push('Photovoltaik sollte 25% betragen.');
-        if (!bmOk) h.push('Biomasse sollte 68% betragen.');
-        msg = h.join(' | ') + ' Tipp: Die drei Anteile müssen zusammen 100% ergeben.';
+        const h = [];
+        if (!pvOk) h.push(
+            'Photovoltaik: Rechnen Sie 25&thinsp;×&thinsp;3,6 und stellen Sie '
+            + 'den Schieberegler auf diesen Gradwert.');
+        if (!bmOk) h.push(
+            'Biomasse: Rechnen Sie 68&thinsp;×&thinsp;3,6 und stellen Sie '
+            + 'den Schieberegler auf diesen Gradwert.');
+        msg = h.join(' | ');
     }
-    saveFb('A6c','fb6c','btn6c', correct, firstTry, correct&&firstTry?2:0, msg);
-    if (correct) document.getElementById('btn6c').disabled = true;
+    saveFb('A6c', 'fb6c', 'btn6c', correct, firstTry, correct && firstTry ? 2 : 0, msg);
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   RESTORE SAVED STATE
+═══════════════════════════════════════════════════════════════════ */
 (function restoreAll() {
-    [['A6a','fb6a','btn6a'],['A6b','fb6b','btn6b'],['A6c','fb6c','btn6c']].forEach(([id,fb,btn]) => {
-        const ts = getTaskState(id);
-        if (ts.submitted) {
-            const fbEl = document.getElementById(fb);
-            if (fbEl) { fbEl.className='feedback '+(ts.correct?'correct':'incorrect'); fbEl.innerHTML=ts.feedbackText||''; fbEl.style.display='block'; }
-            if (ts.correct) { const b=document.getElementById(btn); if(b) b.disabled=true; }
-        }
-    });
-    // Restore slider
+    // 6a
     const ts6a = getTaskState('A6a');
-    if (ts6a.submitted && ts6a.correct) {
-        document.getElementById('steinkohleSlider').value = 1937;
-        steinkohleUserVal = 1937;
-        document.getElementById('steinkohleVal').textContent = 1937;
-        drawBarChart();
+    if (ts6a.submitted) {
+        if (ts6a.correct) {
+            steinkohleUserVal = 1937;
+            document.getElementById('steinkohleSlider').value = 1937;
+            document.getElementById('steinkohleVal').textContent = '1937 GWh';
+            drawBarChart();
+            document.getElementById('btn6a').disabled = true;
+        }
+        const f = document.getElementById('fb6a');
+        f.className = 'feedback ' + (ts6a.correct ? 'correct' : 'incorrect');
+        f.innerHTML = ts6a.feedbackText || '';
+        f.style.display = 'block';
     }
+
+    // 6b
+    const ts6b = getTaskState('A6b');
+    if (ts6b.submitted) {
+        const f = document.getElementById('fb6b');
+        f.className = 'feedback ' + (ts6b.correct ? 'correct' : 'incorrect');
+        f.innerHTML = ts6b.feedbackText || '';
+        f.style.display = 'block';
+        if (ts6b.correct) document.getElementById('btn6b').disabled = true;
+    }
+
+    // 6c
     const ts6c = getTaskState('A6c');
     if (ts6c.submitted && ts6c.correct) {
-        document.getElementById('pvSlider').value = 25; pvPct = 25;
-        document.getElementById('pvVal').textContent = 25;
-        document.getElementById('bmSlider').value = 68; bmPct = 68;
-        document.getElementById('bmVal').textContent = 68;
+        // Restore sliders / inputs to correct values
+        pvDeg = Math.round(PV_DEG);
+        bmDeg = Math.round(BM_DEG);
+
+        document.getElementById('pvSlider').value   = pvDeg;
+        document.getElementById('bmSlider').value   = bmDeg;
+        document.getElementById('pv_deg_input').value = pvDeg;
+        document.getElementById('bm_deg_input').value = bmDeg;
+        document.getElementById('pvDegDisplay').textContent = pvDeg + '°';
+        document.getElementById('bmDegDisplay').textContent = bmDeg + '°';
+
+        updateSumDisplay();
         drawPie();
+        document.getElementById('btn6c').disabled = true;
+    }
+    if (ts6c.submitted) {
+        const f = document.getElementById('fb6c');
+        f.className = 'feedback ' + (ts6c.correct ? 'correct' : 'incorrect');
+        f.innerHTML = ts6c.feedbackText || '';
+        f.style.display = 'block';
     }
 })();
 </script>
