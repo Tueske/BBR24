@@ -432,24 +432,28 @@ function submit1f() {
     fb.style.display = 'block';
 }
 
-// Triangle drawing - Right triangle with legs 5 and 12, hypotenuse 13
+// Triangle drawing
 function drawTriangle() {
     const canvas = document.getElementById('triangleCanvas');
     const ctx = canvas.getContext('2d');
     const W = canvas.width, H = canvas.height;
     ctx.clearRect(0, 0, W, H);
-    // Right triangle: legs 5 cm (vertical) and 12 cm (horizontal), hypotenuse 13 cm
-    const scale = 16;
-    const leftx = 30, basey = H - 20;
-    // Right angle at bottom-left
-    const p1 = { x: leftx, y: basey };  // bottom-left (right angle)
-    const p2 = { x: leftx + 12 * scale, y: basey };  // bottom-right
-    const p3 = { x: leftx, y: basey - 5 * scale };  // top-left
+    // Triangle with base 13, left side 5 (height), right side 12
+    // Let's place it: bottom-left at (20, H-20), base 13 units wide
+    const scale = 14;
+    const bx = 20, by = H - 20;
+    const ex = bx + 13 * scale, ey = by;
+    // apex: based on the exam image the apex appears to be closer to the left side
+    // With sides 5 (left from apex to a point), 12 (right), base 13
+    // Actually: the triangle has a height drawn from apex. height appears to be 5 (left label)
+    // base = 13, the vertical height-like dimension is 5
+    // Let's compute: place apex at top
+    const ax = bx + 3 * scale, ay = by - 5 * scale;
     
     ctx.beginPath();
-    ctx.moveTo(p1.x, p1.y);
-    ctx.lineTo(p2.x, p2.y);
-    ctx.lineTo(p3.x, p3.y);
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(bx, by);
+    ctx.lineTo(ex, ey);
     ctx.closePath();
     ctx.fillStyle = '#ddd';
     ctx.fill();
@@ -461,17 +465,9 @@ function drawTriangle() {
     ctx.fillStyle = '#333';
     ctx.font = '13px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('12 cm', (p1.x + p2.x) / 2, basey + 18);
-    ctx.textAlign = 'right';
-    ctx.fillText('5 cm', leftx - 10, (p1.y + p3.y) / 2);
-    ctx.textAlign = 'center';
-    ctx.fillText('13 cm', (p2.x + p3.x) / 2 + 15, (p2.y + p3.y) / 2 - 10);
-    
-    // Mark right angle
-    const cornerSize = 6;
-    ctx.strokeStyle = '#333';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(p1.x, p1.y - cornerSize, cornerSize, cornerSize);
+    ctx.fillText('13 cm', (bx + ex) / 2, by + 18);
+    ctx.fillText('5 cm', ax - 22, (ay + by) / 2);
+    ctx.fillText('12 cm', (ax + ex) / 2 + 10, (ay + ey) / 2 - 8);
 }
 drawTriangle();
 
@@ -480,15 +476,15 @@ function submit1g() {
     const firstTry = !ts.submitted;
     const sel = document.querySelector('input[name="q1g"]:checked');
     if (!sel) { showFeedback('fb1g', false, 'Bitte wählen Sie eine Antwort.', 0); return; }
-    // Right triangle with legs 5 and 12: A = (5 × 12) / 2 = 30 cm²
+    // A = (5 × 12) / 2 = 30 cm²
     const correct = sel.value === '30';
     let msg, pts = 0;
     if (correct) {
-        msg = 'Richtig! Das ist ein rechtwinkliges Dreieck mit den Katheten 5 cm und 12 cm. A = (5 × 12) / 2 = 30 cm²';
+        msg = 'Richtig! A = (5 × 12) / 2 = 30 cm²';
         if (firstTry) pts = 1;
         document.getElementById('btn1g').disabled = true;
     } else {
-        msg = 'Nicht korrekt. Tipp: Das ist ein rechtwinkliges Dreieck mit den Katheten 5 cm und 12 cm (Hypotenuse 13 cm). A = (Kathete₁ × Kathete₂) / 2';
+        msg = 'Nicht korrekt. Tipp: Flächeninhalt Dreieck = (Kathete₁ × Kathete₂) / 2 = (5 × 12) / 2 = 30 cm²';
     }
     const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkt</span>` : '');
     setTaskState('A1g', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
