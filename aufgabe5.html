@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgabe 5 – Online-Bestellung</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-header">
+    <a href="index.html" class="back-btn">← Übersicht</a>
+    <h2>Vergleichende Arbeit Mathematik 2023</h2>
+</div>
+<div class="task-page">
+    <div class="task-title">
+        Aufgabe 5: Online-Bestellung
+        <span class="pts-badge">6 Punkte</span>
+    </div>
+
+    <div style="background:white;border:1px solid #ddd;border-radius:6px;padding:14px;margin-bottom:16px;">
+        <p>Für das Sportfest der Schule wollen die Spielerinnen des Fußballteams T-Shirts bestellen.</p>
+        <p style="margin-top:8px;">Bei einem Versandhandel kostet ein T-Shirt <strong>8,50 €</strong>. Für den Versand werden zusätzlich <strong>12,00 €</strong> berechnet.</p>
+        <p style="margin-top:8px;">Formel: Gesamtpreis = Anzahl × 8,50 € + 12,00 €</p>
+    </div>
+
+    <!-- 5a: Tabelle -->
+    <div class="subtask" id="sub5a">
+        <div class="subtask-header">
+            <div class="subtask-label">a) Ergänzen Sie die Wertetabelle. Wie hoch sind die Kosten für die Bestellung?</div>
+            <div class="subtask-pts">(3 P)</div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Anzahl T-Shirts</th>
+                    <th>5</th>
+                    <th>8</th>
+                    <th>10</th>
+                    <th>12</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Gesamtpreis</strong></td>
+                    <td><input type="text" id="t5a_5" placeholder="?"> €</td>
+                    <td><input type="text" id="t5a_8" placeholder="?"> €</td>
+                    <td><input type="text" id="t5a_10" placeholder="?"> €</td>
+                    <td style="background:#f0f0f0;"><strong>114 €</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="submit-btn" id="btn5a" onclick="submit5a()">Antwort prüfen</button>
+        <div class="feedback" id="fb5a"></div>
+    </div>
+
+    <!-- 5b: Koordinatensystem -->
+    <div class="subtask" id="sub5b">
+        <div class="subtask-header">
+            <div class="subtask-label">b) Stellen Sie den Zusammenhang in einem Koordinatensystem dar. Klicken Sie auf die Punkte, um sie einzutragen.</div>
+            <div class="subtask-pts">(3 P)</div>
+        </div>
+        <p style="font-size:0.9rem;color:#555;margin-bottom:8px;">
+            Tragen Sie die vier Punkte aus der Tabelle ein (Anzahl auf x-Achse, Gesamtpreis auf y-Achse) und verbinden Sie sie mit einer Linie.
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
+            <button onclick="addPoint5b()" style="background:#c00;color:white;border:none;padding:6px 14px;border-radius:4px;cursor:pointer;">Punkt hinzufügen</button>
+            <button onclick="clearPoints5b()" style="background:#666;color:white;border:none;padding:6px 14px;border-radius:4px;cursor:pointer;">Zurücksetzen</button>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">
+            <label>x (Anzahl): <input type="number" id="px5b" min="0" max="15" value="5" style="width:60px;"></label>
+            <label>y (Preis €): <input type="number" id="py5b" min="0" max="160" value="54.5" style="width:80px;"></label>
+        </div>
+        <canvas id="coordCanvas5b" width="500" height="380" class="coord-canvas" style="border:1px solid #ccc;border-radius:4px;"></canvas>
+        <div id="pointsList5b" style="font-size:0.85rem;color:#555;margin-top:6px;"></div>
+        <button class="submit-btn" id="btn5b" onclick="submit5b()">Diagramm prüfen</button>
+        <div class="feedback" id="fb5b"></div>
+    </div>
+
+    <div class="nav-footer">
+        <a href="aufgabe4.html">← Aufgabe 4</a>
+        <a href="aufgabe6.html">Aufgabe 6 →</a>
+    </div>
+</div>
+<script src="exam.js"></script>
+<script>
+// ── Koordinatensystem ──
+const EXPECTED_POINTS = [
+    { x: 5,  y: 54.5 },
+    { x: 8,  y: 80   },
+    { x: 10, y: 97   },
+    { x: 12, y: 114  }
+];
+
+let userPoints5b = [];
+
+const CV = document.getElementById('coordCanvas5b');
+const ctx5b = CV.getContext('2d');
+const CPAD = { left: 55, right: 20, top: 20, bottom: 50 };
+const X_MAX = 14, Y_MAX = 160, Y_STEP = 20, X_STEP = 2;
+
+function worldToCanvas(wx, wy) {
+    const cw = CV.width - CPAD.left - CPAD.right;
+    const ch = CV.height - CPAD.top - CPAD.bottom;
+    return {
+        x: CPAD.left + (wx / X_MAX) * cw,
+        y: CPAD.top + ch - (wy / Y_MAX) * ch
+    };
+}
+
+function drawCoord5b() {
+    ctx5b.clearRect(0, 0, CV.width, CV.height);
+    const cw = CV.width - CPAD.left - CPAD.right;
+    const ch = CV.height - CPAD.top - CPAD.bottom;
+
+    // Grid
+    ctx5b.strokeStyle = '#ddd';
+    ctx5b.lineWidth = 1;
+    for (let y = 0; y <= Y_MAX; y += Y_STEP) {
+        const py = worldToCanvas(0, y).y;
+        ctx5b.beginPath(); ctx5b.moveTo(CPAD.left, py); ctx5b.lineTo(CV.width - CPAD.right, py); ctx5b.stroke();
+    }
+    for (let x = 0; x <= X_MAX; x += X_STEP) {
+        const px = worldToCanvas(x, 0).x;
+        ctx5b.beginPath(); ctx5b.moveTo(px, CPAD.top); ctx5b.lineTo(px, CV.height - CPAD.bottom); ctx5b.stroke();
+    }
+
+    // Axes
+    ctx5b.strokeStyle = '#333';
+    ctx5b.lineWidth = 2;
+    // x-axis
+    ctx5b.beginPath();
+    ctx5b.moveTo(CPAD.left, CV.height - CPAD.bottom);
+    ctx5b.lineTo(CV.width - CPAD.right + 10, CV.height - CPAD.bottom);
+    ctx5b.stroke();
+    // y-axis
+    ctx5b.beginPath();
+    ctx5b.moveTo(CPAD.left, CPAD.top - 10);
+    ctx5b.lineTo(CPAD.left, CV.height - CPAD.bottom);
+    ctx5b.stroke();
+
+    // Arrows
+    ctx5b.fillStyle = '#333';
+    ctx5b.beginPath();
+    ctx5b.moveTo(CV.width - CPAD.right + 10, CV.height - CPAD.bottom);
+    ctx5b.lineTo(CV.width - CPAD.right + 2, CV.height - CPAD.bottom - 5);
+    ctx5b.lineTo(CV.width - CPAD.right + 2, CV.height - CPAD.bottom + 5);
+    ctx5b.fill();
+    ctx5b.beginPath();
+    ctx5b.moveTo(CPAD.left, CPAD.top - 10);
+    ctx5b.lineTo(CPAD.left - 5, CPAD.top - 2);
+    ctx5b.lineTo(CPAD.left + 5, CPAD.top - 2);
+    ctx5b.fill();
+
+    // Labels
+    ctx5b.fillStyle = '#333';
+    ctx5b.font = '12px Arial';
+    ctx5b.textAlign = 'center';
+    // x labels
+    for (let x = 0; x <= X_MAX; x += 2) {
+        const px = worldToCanvas(x, 0).x;
+        ctx5b.fillText(x, px, CV.height - CPAD.bottom + 18);
+    }
+    // y labels
+    ctx5b.textAlign = 'right';
+    for (let y = 0; y <= Y_MAX; y += Y_STEP) {
+        const py = worldToCanvas(0, y).y;
+        ctx5b.fillText(y, CPAD.left - 6, py + 4);
+    }
+    // Axis names
+    ctx5b.textAlign = 'center';
+    ctx5b.font = '13px Arial';
+    ctx5b.fillText('Anzahl T-Shirts', CPAD.left + cw / 2, CV.height - 8);
+    ctx5b.save();
+    ctx5b.translate(14, CPAD.top + ch / 2);
+    ctx5b.rotate(-Math.PI / 2);
+    ctx5b.fillText('Gesamtpreis (€)', 0, 0);
+    ctx5b.restore();
+
+    // "100" reference label on y-axis (as in original)
+    ctx5b.fillStyle = '#c00';
+    ctx5b.textAlign = 'right';
+    ctx5b.font = 'bold 12px Arial';
+    ctx5b.fillText('100', CPAD.left - 6, worldToCanvas(0, 100).y + 4);
+
+    // Draw user points & line
+    if (userPoints5b.length > 1) {
+        ctx5b.strokeStyle = '#c00';
+        ctx5b.lineWidth = 2;
+        ctx5b.beginPath();
+        userPoints5b.forEach((p, i) => {
+            const cp = worldToCanvas(p.x, p.y);
+            if (i === 0) ctx5b.moveTo(cp.x, cp.y); else ctx5b.lineTo(cp.x, cp.y);
+        });
+        ctx5b.stroke();
+    }
+    userPoints5b.forEach(p => {
+        const cp = worldToCanvas(p.x, p.y);
+        ctx5b.beginPath();
+        ctx5b.arc(cp.x, cp.y, 6, 0, Math.PI * 2);
+        ctx5b.fillStyle = '#c00';
+        ctx5b.fill();
+        ctx5b.fillStyle = 'white';
+        ctx5b.font = '10px Arial';
+        ctx5b.textAlign = 'center';
+        ctx5b.fillText(`(${p.x},${p.y})`, cp.x, cp.y - 12);
+    });
+}
+
+function addPoint5b() {
+    const px = parseFloat(document.getElementById('px5b').value);
+    const py = parseFloat(document.getElementById('py5b').value);
+    if (isNaN(px) || isNaN(py)) return;
+    if (px < 0 || px > X_MAX || py < 0 || py > Y_MAX) {
+        alert('Wert außerhalb des Koordinatensystems!'); return;
+    }
+    // Remove duplicate x
+    userPoints5b = userPoints5b.filter(p => Math.abs(p.x - px) > 0.1);
+    userPoints5b.push({ x: px, y: py });
+    userPoints5b.sort((a, b) => a.x - b.x);
+    savePoints5b();
+    drawCoord5b();
+    updatePointsList5b();
+}
+
+function clearPoints5b() {
+    userPoints5b = [];
+    savePoints5b();
+    drawCoord5b();
+    updatePointsList5b();
+}
+
+function updatePointsList5b() {
+    const el = document.getElementById('pointsList5b');
+    if (userPoints5b.length === 0) { el.textContent = 'Noch keine Punkte eingetragen.'; return; }
+    el.textContent = 'Eingetragene Punkte: ' + userPoints5b.map(p => `(${p.x} | ${p.y})`).join(', ');
+}
+
+function savePoints5b() {
+    setTaskState('A5b_points', { pts: userPoints5b });
+}
+
+function submit5a() {
+    const ts = getTaskState('A5a');
+    const firstTry = !ts.submitted;
+    const v5  = parseGerman(document.getElementById('t5a_5').value);
+    const v8  = parseGerman(document.getElementById('t5a_8').value);
+    const v10 = parseGerman(document.getElementById('t5a_10').value);
+    // f(n) = 8.5n + 12
+    const c5  = approxEqual(v5,  54.5, 0.1);
+    const c8  = approxEqual(v8,  80,   0.1);
+    const c10 = approxEqual(v10, 97,   0.1);
+    const allCorrect = c5 && c8 && c10;
+    let msg;
+    if (allCorrect) {
+        msg = 'Richtig! Formel: n × 8,50 € + 12,00 €. Ergebnisse: 5→54,50€ | 8→80,00€ | 10→97,00€ | 12→114,00€';
+    } else {
+        let hints = [];
+        if (!c5)  hints.push('5 T-Shirts: 5×8,50+12=?');
+        if (!c8)  hints.push('8 T-Shirts: 8×8,50+12=?');
+        if (!c10) hints.push('10 T-Shirts: 10×8,50+12=?');
+        msg = 'Nicht alle Werte korrekt. Formel: Anzahl × 8,50 + 12,00. Überprüfen Sie: ' + hints.join(' | ');
+    }
+    const pts = allCorrect && firstTry ? 3 : (ts.points || 0);
+    const badge = allCorrect && pts > 0 ? ` <span class="points-earned">+${pts} Punkte</span>` : '';
+    const fbText = (allCorrect ? '✓ ' : '✗ ') + msg + badge;
+    setTaskState('A5a', { submitted: true, correct: allCorrect, points: pts, feedbackText: fbText });
+    const fb = document.getElementById('fb5a');
+    fb.className = 'feedback ' + (allCorrect ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+    if (allCorrect) document.getElementById('btn5a').disabled = true;
+}
+
+function submit5b() {
+    const ts = getTaskState('A5b');
+    const firstTry = !ts.submitted;
+    // Check that all 4 expected points are approximately present
+    let found = 0;
+    for (const ep of EXPECTED_POINTS) {
+        if (userPoints5b.some(p => Math.abs(p.x - ep.x) < 0.5 && Math.abs(p.y - ep.y) < 3)) found++;
+    }
+    const correct = found >= 3;
+    const msg = correct
+        ? `Gut gemacht! ${found} von 4 Punkten korrekt eingetragen. Die Punkte bilden eine Gerade (lineare Funktion).`
+        : `Nur ${found} von 4 Punkten korrekt. Tipp: Tragen Sie die Wertepaare aus der Tabelle ein: (5|54,50), (8|80), (10|97), (12|114).`;
+    const pts = correct && firstTry ? 3 : (ts.points || 0);
+    const badge = correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkte</span>` : '';
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + badge;
+    setTaskState('A5b', { submitted: true, correct, points: pts, feedbackText: fbText });
+    const fb = document.getElementById('fb5b');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+    if (correct) document.getElementById('btn5b').disabled = true;
+}
+
+// Init
+(function init() {
+    // Restore points
+    const pState = getTaskState('A5b_points');
+    if (pState.pts) { userPoints5b = pState.pts; }
+    drawCoord5b();
+    updatePointsList5b();
+
+    // Restore table values
+    const ts5a = getTaskState('A5a');
+    if (ts5a.submitted) {
+        // pre-fill with correct values
+        document.getElementById('t5a_5').value  = '54,50';
+        document.getElementById('t5a_8').value  = '80';
+        document.getElementById('t5a_10').value = '97';
+        const fb = document.getElementById('fb5a');
+        fb.className = 'feedback ' + (ts5a.correct ? 'correct' : 'incorrect');
+        fb.innerHTML = ts5a.feedbackText || '';
+        fb.style.display = 'block';
+        if (ts5a.correct) document.getElementById('btn5a').disabled = true;
+    }
+
+    [['A5b','fb5b','btn5b']].forEach(([id,fb,btn]) => {
+        const ts = getTaskState(id);
+        if (ts.submitted) {
+            const fbEl = document.getElementById(fb);
+            if (fbEl) { fbEl.className='feedback '+(ts.correct?'correct':'incorrect'); fbEl.innerHTML=ts.feedbackText||''; fbEl.style.display='block'; }
+            if (ts.correct) { const b=document.getElementById(btn); if(b) b.disabled=true; }
+        }
+    });
+})();
+</script>
+</body>
+</html>

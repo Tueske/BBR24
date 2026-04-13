@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vergleichende Arbeit Mathematik 2023</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cover-page">
+        <div class="header">
+            <div class="header-text">
+                <p>Senatsverwaltung für Bildung,<br>Jugend und Familie</p>
+            </div>
+            <div class="berlin-logo">
+                <span class="berlin-text">BERLIN</span>
+                <span class="bear">🐻</span>
+            </div>
+        </div>
+        <div class="cover-content">
+            <h1>Vergleichende Arbeit 2023<br>im Fach Mathematik</h1>
+            <ul>
+                <li>zum Erwerb der Berufsbildungsreife</li>
+                <li>zum Erwerb des der Berufsbildungsreife gleichwertigen Abschlusses bzw. des berufsorientierenden Abschlusses für Schülerinnen und Schüler mit dem sonderpädagogischen Förderbedarf „Lernen" in der Jahrgangsstufe 10</li>
+            </ul>
+            <h2>Freitag, 02. Juni 2023</h2>
+            <h3>Nachschreibtermin</h3>
+            <div class="info-grid">
+                <div><strong>Arbeitszeit:</strong></div><div>10:00 – 12:00 Uhr</div>
+                <div><strong>Bearbeitungszeit:</strong></div><div>90 Minuten + 30 Minuten</div>
+                <div><strong>Anzahl der Aufgaben:</strong></div><div>7</div>
+            </div>
+            <div class="hints-box">
+                <p><strong>Hinweise zur Bearbeitung:</strong></p>
+                <ul>
+                    <li>Bearbeiten Sie bitte alle Aufgaben.</li>
+                    <li>Bei Berechnungen müssen Lösungswege aufgeschrieben werden.</li>
+                    <li>Aufgaben zu anspruchsvolleren Themen sind mit einem Stern (*) gekennzeichnet.</li>
+                    <li>Es sind <strong>51 Punkte</strong> erreichbar.</li>
+                    <li>Nur für Schülerinnen und Schüler mit dem sonderpädagogischen Förderbedarf „Lernen": Für den berufsorientierenden Abschluss entsprechen bereits 34 Punkte 100 %.</li>
+                </ul>
+            </div>
+            <div class="student-info">
+                <label>Name, Vorname: <input type="text" id="studentName" placeholder="Ihr Name"></label>
+                <label>Klasse: <input type="text" id="studentClass" placeholder="Klasse"></label>
+                <button onclick="saveStudentInfo()">Speichern</button>
+            </div>
+        </div>
+        <div class="score-overview" id="scoreOverview">
+            <h3>Punkteübersicht</h3>
+            <div id="scoreGrid"></div>
+            <div class="total-score">Gesamtpunkte: <span id="totalScore">0</span> / 51</div>
+        </div>
+        <nav class="task-nav">
+            <h3>Aufgaben</h3>
+            <div class="nav-grid">
+                <a href="aufgabe1.html" class="nav-btn">Aufgabe 1<br><small>Basisaufgaben (11 P)</small></a>
+                <a href="aufgabe2.html" class="nav-btn">Aufgabe 2<br><small>Elektroautos (7 P)</small></a>
+                <a href="aufgabe3.html" class="nav-btn">Aufgabe 3<br><small>Quader (5 P)</small></a>
+                <a href="aufgabe4.html" class="nav-btn">Aufgabe 4<br><small>Grundstück (8 P)</small></a>
+                <a href="aufgabe5.html" class="nav-btn">Aufgabe 5<br><small>Online-Bestellung (6 P)</small></a>
+                <a href="aufgabe6.html" class="nav-btn">Aufgabe 6<br><small>Berliner Strom (6 P)</small></a>
+                <a href="aufgabe7.html" class="nav-btn">Aufgabe 7<br><small>Kuchen (8 P)</small></a>
+            </div>
+        </nav>
+    </div>
+    <script src="exam.js"></script>
+    <script>
+        loadStudentInfo();
+        updateScoreOverview();
+    </script>
+</body>
+</html>

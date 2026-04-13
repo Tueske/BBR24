@@ -1,0 +1,407 @@
+/* style.css */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background: #f5f5f5;
+    color: #222;
+    min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.page-header {
+    background: #c00;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.page-header h2 { font-size: 1.1rem; }
+.back-btn {
+    background: white;
+    color: #c00;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+/* ── COVER ── */
+.cover-page { max-width: 900px; margin: 0 auto; padding: 20px; }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #c00;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.berlin-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid #c00;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+.berlin-text { color: #c00; font-weight: bold; font-size: 1.2rem; }
+.bear { font-size: 1.4rem; }
+.cover-content h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+.cover-content h2 { text-align: center; margin: 12px 0 4px; font-size: 1.3rem; }
+.cover-content h3 { text-align: center; margin-bottom: 16px; font-weight: normal; }
+.cover-content ul { margin: 0 0 16px 24px; line-height: 1.6; }
+.info-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+    margin: 16px 0;
+}
+.hints-box {
+    border: 1px solid #333;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 4px;
+    background: #fff;
+}
+.hints-box ul { margin-left: 20px; margin-top: 6px; line-height: 1.7; }
+.student-info {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    border: 1px solid #aaa;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.student-info label { display: flex; align-items: center; gap: 8px; }
+.student-info input {
+    border: 1px solid #aaa;
+    border-bottom: 2px solid #333;
+    background: transparent;
+    padding: 4px 8px;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 4px;
+    width: 180px;
+}
+.student-info button {
+    background: #c00;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+/* ── SCORE OVERVIEW ── */
+.score-overview {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+.score-overview h3 { margin-bottom: 12px; color: #c00; }
+#scoreGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.score-item {
+    background: #f0f0f0;
+    border-radius: 4px;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.score-item .pts { font-size: 1.2rem; font-weight: bold; color: #c00; }
+.total-score { font-size: 1.2rem; font-weight: bold; text-align: right; }
+
+/* ── NAV GRID ── */
+.task-nav h3 { margin-bottom: 12px; }
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+.nav-btn {
+    background: white;
+    border: 2px solid #c00;
+    color: #c00;
+    padding: 16px 12px;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s, color 0.2s;
+    font-weight: bold;
+    line-height: 1.4;
+}
+.nav-btn:hover { background: #c00; color: white; }
+.nav-btn small { font-weight: normal; font-size: 0.85rem; }
+
+/* ── TASK PAGE ── */
+.task-page { max-width: 900px; margin: 0 auto; padding: 20px; }
+.task-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-bottom: 2px solid #333;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.task-title .pts-badge {
+    background: #c00;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* ── SUBTASK ── */
+.subtask {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.subtask-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+.subtask-label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
+    flex: 1;
+    line-height: 1.5;
+}
+.subtask-pts {
+    background: #eee;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    margin-left: 12px;
+}
+.star-task .subtask-label::before { content: "★ "; color: #c00; }
+
+/* ── INPUTS ── */
+input[type=text], input[type=number], textarea {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 1rem;
+    outline: none;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+input[type=text]:focus, input[type=number]:focus, textarea:focus {
+    border-color: #c00;
+    box-shadow: 0 0 0 2px rgba(200,0,0,0.15);
+}
+textarea { resize: vertical; min-height: 60px; }
+
+/* ── RADIO / CHECKBOX ── */
+.options { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0; }
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 14px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    transition: border-color 0.2s;
+    font-size: 1rem;
+}
+.option-label:hover { border-color: #c00; }
+.option-label input { width: auto; }
+.option-label.selected { border-color: #c00; background: #fff5f5; }
+
+/* ── BUTTONS ── */
+.submit-btn {
+    background: #c00;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+.submit-btn:hover { background: #a00; }
+.submit-btn:disabled { background: #aaa; cursor: not-allowed; }
+
+/* ── FEEDBACK ── */
+.feedback {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    display: none;
+}
+.feedback.correct {
+    background: #e6f9ec;
+    border: 1px solid #4caf50;
+    color: #2e7d32;
+    display: block;
+}
+.feedback.incorrect {
+    background: #fdecea;
+    border: 1px solid #f44336;
+    color: #b71c1c;
+    display: block;
+}
+.feedback.info {
+    background: #e3f2fd;
+    border: 1px solid #2196f3;
+    color: #0d47a1;
+    display: block;
+}
+
+/* ── NUMBER LINE (Task 1a) ── */
+.number-line-container {
+    position: relative;
+    margin: 20px 0;
+    padding: 10px 0;
+}
+#numberLineCanvas {
+    width: 100%;
+    max-width: 600px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ── FRACTION GRID (Task 1b) ── */
+.fraction-grid-canvas { display: block; margin: 10px auto; }
+
+/* ── INLINE INPUT ROW ── */
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    flex-wrap: wrap;
+}
+.input-row label { min-width: 120px; }
+.input-row input[type=text], .input-row input[type=number] {
+    width: 120px;
+}
+
+/* ── TABLE ── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+    background: white;
+}
+th, td {
+    border: 1px solid #aaa;
+    padding: 8px 12px;
+    text-align: center;
+}
+th { background: #f0f0f0; font-weight: bold; }
+td input { width: 100px; text-align: center; }
+
+/* ── CHART CANVAS ── */
+.chart-container { margin: 10px 0; overflow-x: auto; }
+canvas { max-width: 100%; }
+
+/* ── NAV FOOTER ── */
+.nav-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid #ddd;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.nav-footer a, .nav-footer button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.nav-footer a:hover, .nav-footer button:hover { background: #555; }
+
+/* ── COORDINATE SYSTEM ── */
+.coord-canvas { display: block; margin: 10px auto; cursor: crosshair; }
+
+/* ── PIE CHART ── */
+.pie-container { position: relative; display: inline-block; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+    .task-title { font-size: 1.1rem; }
+    .nav-grid { grid-template-columns: 1fr 1fr; }
+    .options { flex-direction: column; }
+    .info-grid { grid-template-columns: 1fr; }
+}
+
+/* ── CORRECT/INCORRECT highlights ── */
+.subtask.correct-state { border-color: #4caf50; border-width: 2px; }
+.subtask.incorrect-state { border-color: #f44336; border-width: 2px; }
+
+/* ── POINTS EARNED BADGE ── */
+.points-earned {
+    display: inline-block;
+    background: #4caf50;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+.points-zero {
+    display: inline-block;
+    background: #f44336;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+/* Work area */
+.work-area {
+    margin: 10px 0;
+}
+.work-area label { display: block; font-size: 0.9rem; color: #666; margin-bottom: 4px; }
+
+/* Quader net drawing */
+.quader-net { display: block; margin: 0 auto; }
+
+/* ── SLIDER on numberline ── */
+.nl-marker { fill: #c00; }

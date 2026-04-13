@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgabe 4 – Grundstück</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-header">
+    <a href="index.html" class="back-btn">← Übersicht</a>
+    <h2>Vergleichende Arbeit Mathematik 2023</h2>
+</div>
+<div class="task-page">
+    <div class="task-title">
+        Aufgabe 4: Grundstück
+        <span class="pts-badge">8 Punkte</span>
+    </div>
+
+    <p style="margin-bottom:12px;">Ein Grundstück besteht aus zwei dreieckigen Flächen. Der eine Teil ist mit Steinen gepflastert, der andere Teil ist Rasenfläche.</p>
+    <canvas id="grundstueckCanvas" width="560" height="220" style="display:block;margin:0 auto 20px;border:1px solid #ddd;border-radius:4px;"></canvas>
+
+    <!-- 4a -->
+    <div class="subtask" id="sub4a">
+        <div class="subtask-header">
+            <div class="subtask-label">a) Wie groß ist der Winkel γ? Berechnen Sie.</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <p style="font-size:0.92rem;color:#555;margin-bottom:8px;">
+            Hinweis: Die Winkelsumme im Dreieck beträgt 180°. Das Dreieck (Rasenfläche) hat zwei Winkel von je 25°.
+        </p>
+        <div class="work-area">
+            <label>Lösungsweg:</label>
+            <textarea id="work4a" rows="2" placeholder="z.B. 180° - ..."></textarea>
+        </div>
+        <div class="input-row">
+            <label>γ =</label>
+            <input type="text" id="in4a" placeholder="?"> °
+        </div>
+        <button class="submit-btn" id="btn4a" onclick="submit4a()">Antwort prüfen</button>
+        <div class="feedback" id="fb4a"></div>
+    </div>
+
+    <!-- 4b -->
+    <div class="subtask" id="sub4b">
+        <div class="subtask-header">
+            <div class="subtask-label">b) Wie groß ist der Flächeninhalt der Rasenfläche? Berechnen Sie.</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <p style="font-size:0.92rem;color:#555;margin-bottom:8px;">
+            Hinweis: Die Rasenfläche ist ein Dreieck mit Grundlinie 30 m. Die Höhe ergibt sich aus dem Dreieck (Basis CA = 30 m, Winkel bei C und A = je 25°).
+            Die Höhe des Rasendreiecks beträgt ca. 7 m (aus dem Bild ablesbar: Punkt B liegt 7 m über der Grundlinie).
+        </p>
+        <div class="work-area">
+            <label>Lösungsweg:</label>
+            <textarea id="work4b" rows="3" placeholder="A = (g × h) / 2 = ..."></textarea>
+        </div>
+        <div class="input-row">
+            <label>Fläche Rasen =</label>
+            <input type="text" id="in4b" placeholder="?"> m²
+        </div>
+        <button class="submit-btn" id="btn4b" onclick="submit4b()">Antwort prüfen</button>
+        <div class="feedback" id="fb4b"></div>
+    </div>
+
+    <!-- 4c* -->
+    <div class="subtask star-task" id="sub4c">
+        <div class="subtask-header">
+            <div class="subtask-label">c)* Wie groß ist der Umfang der mit Steinen gepflasterten Fläche? Berechnen Sie.</div>
+            <div class="subtask-pts">(3 P)</div>
+        </div>
+        <p style="font-size:0.92rem;color:#555;margin-bottom:8px;">
+            Hinweis: Die Steinfläche ist ein Dreieck mit den Seiten: 7 m (links), 15 m (oben) und der gemeinsamen Seite mit der Rasenfläche (von C nach B).
+            Die Seite CB kann mit dem Satz des Pythagoras berechnet werden (rechter Winkel beim Schnittpunkt von h und CB).
+            Alternativ: Die Grundlinie der Steinfläche liegt auf CA, die Breite beträgt 15 m und die Höhe 7 m.
+            Seite CB ≈ √(15² + 7²) = √(225+49) = √274 ≈ 16,55 m.
+        </p>
+        <div class="work-area">
+            <label>Lösungsweg:</label>
+            <textarea id="work4c" rows="4" placeholder="Umfang = Seite1 + Seite2 + Seite3 = ..."></textarea>
+        </div>
+        <div class="input-row">
+            <label>Umfang Steinfläche ≈</label>
+            <input type="text" id="in4c" placeholder="?"> m
+        </div>
+        <button class="submit-btn" id="btn4c" onclick="submit4c()">Antwort prüfen</button>
+        <div class="feedback" id="fb4c"></div>
+    </div>
+
+    <!-- 4d* -->
+    <div class="subtask star-task" id="sub4d">
+        <div class="subtask-header">
+            <div class="subtask-label">d)* Überprüfen Sie folgende Aussagen. Kreuzen Sie an.</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <div style="overflow-x:auto;">
+        <table id="table4d">
+            <thead>
+                <tr>
+                    <th style="text-align:left;">Aussage</th>
+                    <th>Trifft zu</th>
+                    <th>Trifft nicht zu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align:left;">Der Flächeninhalt des gesamten Grundstücks ist kleiner als 210 m².</td>
+                    <td><label class="option-label" style="justify-content:center;"><input type="radio" name="q4d1" value="yes"></label></td>
+                    <td><label class="option-label" style="justify-content:center;"><input type="radio" name="q4d1" value="no"></label></td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;">Ein Drittel der gesamten Fläche des Grundstücks ist mit Steinen gepflastert.</td>
+                    <td><label class="option-label" style="justify-content:center;"><input type="radio" name="q4d2" value="yes"></label></td>
+                    <td><label class="option-label" style="justify-content:center;"><input type="radio" name="q4d2" value="no"></label></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <button class="submit-btn" id="btn4d" onclick="submit4d()">Antworten prüfen</button>
+        <div class="feedback" id="fb4d"></div>
+    </div>
+
+    <div class="nav-footer">
+        <a href="aufgabe3.html">← Aufgabe 3</a>
+        <a href="aufgabe5.html">Aufgabe 5 →</a>
+    </div>
+</div>
+<script src="exam.js"></script>
+<script>
+// ── Draw Grundstück ──
+// Two triangles sharing a side from C to B
+// C is bottom-left, A is bottom-right, B is top-right area
+// Stone triangle: vertices at left-top, C, B  (left side=7m, top=15m)
+// Rasen triangle: vertices at C, A, B  (base CA=30m, angles at C&A=25°)
+(function drawGrundstueck() {
+    const canvas = document.getElementById('grundstueckCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+
+    const S = 10; // scale: 1m = 10px
+    const ox = 60, oy = H - 40;
+
+    // Points:
+    // C = (ox, oy)
+    // A = (ox + 30*S, oy)
+    // B = where rasen triangle apex is
+    // With base 30m, angles 25° at C and A → isoceles triangle
+    // Height of rasen = tan(25°)*15 ≈ 6.99 ≈ 7m
+    const hRasen = Math.tan(25 * Math.PI / 180) * 15;
+    const C = { x: ox, y: oy };
+    const A = { x: ox + 30 * S, y: oy };
+    const B = { x: ox + 15 * S, y: oy - hRasen * S };
+
+    // Stone triangle: top-left point (P) with 7m left from C and 15m above along left
+    // The stone triangle shares side CB with rasen triangle
+    // Stone triangle vertices: P (top-left), C, B
+    // P is 7m left of C and at same height? No—
+    // From the exam: left side of stone = 7m (vertical), top = 15m (horizontal to B)
+    // P is directly above C (leftmost top point)
+    const P = { x: ox, y: oy - 7 * S };
+
+    // Draw Rasen (hatched)
+    ctx.beginPath();
+    ctx.moveTo(C.x, C.y);
+    ctx.lineTo(A.x, A.y);
+    ctx.lineTo(B.x, B.y);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(180,220,180,0.5)';
+    ctx.fill();
+    ctx.strokeStyle = '#2a7a2a';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Hatching for Rasen
+    ctx.save();
+    ctx.clip();
+    ctx.strokeStyle = 'rgba(100,180,100,0.4)';
+    ctx.lineWidth = 1;
+    for (let i = -200; i < 600; i += 10) {
+        ctx.beginPath();
+        ctx.moveTo(i, oy - 200);
+        ctx.lineTo(i + 200, oy + 200);
+        ctx.stroke();
+    }
+    ctx.restore();
+
+    // Draw Stone (gray fill)
+    ctx.beginPath();
+    ctx.moveTo(P.x, P.y);
+    ctx.lineTo(C.x, C.y);
+    ctx.lineTo(B.x, B.y);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(160,160,160,0.6)';
+    ctx.fill();
+    ctx.strokeStyle = '#444';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 13px Arial';
+    ctx.textAlign = 'center';
+
+    // B label
+    ctx.fillText('B', B.x, B.y - 10);
+    // C label
+    ctx.fillText('C', C.x - 15, C.y + 5);
+    // A label
+    ctx.fillText('A', A.x + 12, A.y + 5);
+
+    // Dimensions
+    ctx.font = '12px Arial';
+    // 30m base
+    ctx.fillText('30 m', (C.x + A.x) / 2, oy + 22);
+    // 7m left side
+    ctx.textAlign = 'right';
+    ctx.fillText('7 m', P.x - 5, (P.y + C.y) / 2 + 4);
+    // 15m top
+    ctx.textAlign = 'center';
+    ctx.fillText('15 m', (P.x + B.x) / 2, (P.y + B.y) / 2 - 8);
+
+    // Angles 25° at C and A
+    ctx.font = '11px Arial';
+    ctx.fillStyle = '#2a7a2a';
+    ctx.textAlign = 'left';
+    ctx.fillText('25°', C.x + 18, C.y - 6);
+    ctx.textAlign = 'right';
+    ctx.fillText('25°', A.x - 18, A.y - 6);
+
+    // γ at B
+    ctx.fillStyle = '#444';
+    ctx.textAlign = 'center';
+    ctx.fillText('γ', B.x + 12, B.y + 12);
+
+    // Labels inside areas
+    ctx.font = 'bold 13px Arial';
+    ctx.fillStyle = '#555';
+    ctx.fillText('Steine', (P.x + C.x + B.x) / 3 + 5, (P.y + C.y + B.y) / 3);
+    ctx.fillStyle = '#2a5a2a';
+    ctx.fillText('Rasen', (C.x + A.x + B.x) / 3 + 10, (C.y + A.y + B.y) / 3 + 5);
+
+    // dot at apex B
+    ctx.beginPath();
+    ctx.arc(B.x, B.y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#333';
+    ctx.fill();
+})();
+
+function saveFb(id, fbId, btnId, correct, firstTry, pts, msg) {
+    const ts = getTaskState(id);
+    const earnedPts = firstTry && correct ? pts : (ts.points || 0);
+    const badge = correct && earnedPts > 0 ? ` <span class="points-earned">+${earnedPts} Punkt${earnedPts!==1?'e':''}</span>` : '';
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + badge;
+    setTaskState(id, { submitted: true, correct, points: earnedPts, feedbackText: fbText });
+    const fb = document.getElementById(fbId);
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+function submit4a() {
+    const ts = getTaskState('A4a');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in4a').value);
+    // Rasen triangle: angles at C=25°, A=25° → γ = 180-25-25 = 130°
+    const correct = approxEqual(val, 130, 1);
+    const msg = correct
+        ? 'Richtig! γ = 180° − 25° − 25° = 130°'
+        : 'Nicht korrekt. Tipp: Die Winkelsumme im Dreieck beträgt 180°. Die beiden bekannten Winkel betragen je 25°.';
+    saveFb('A4a','fb4a','btn4a', correct, firstTry, correct&&firstTry?1:0, msg);
+    if(correct) document.getElementById('btn4a').disabled=true;
+}
+
+function submit4b() {
+    const ts = getTaskState('A4b');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in4b').value);
+    // Rasen: base=30m, height = tan(25°)*15 ≈ 6.99m
+    // A = (30 × 7) / 2 = 105 m²  (using h=7 as given in diagram)
+    const correct = approxEqual(val, 105, 2);
+    const msg = correct
+        ? 'Richtig! A = (Grundlinie × Höhe) / 2 = (30 × 7) / 2 = 105 m²'
+        : 'Nicht korrekt. Tipp: Formel Dreieck: A = (g × h) / 2. Die Grundlinie (CA) beträgt 30 m, die Höhe beträgt 7 m.';
+    saveFb('A4b','fb4b','btn4b', correct, firstTry, correct&&firstTry?2:0, msg);
+    if(correct) document.getElementById('btn4b').disabled=true;
+}
+
+function submit4c() {
+    const ts = getTaskState('A4c');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in4c').value);
+    // Stone triangle: P(top-left), C(bottom-left), B(top-right area)
+    // Side PC = 7m (vertical left side)
+    // Side PB = 15m (top horizontal)
+    // Side CB = √(15²+7²) = √(225+49) = √274 ≈ 16.55m
+    const cb = Math.sqrt(15*15 + 7*7);
+    const perimeter = 7 + 15 + cb; // ≈ 38.55
+    const correct = approxEqual(val, perimeter, 0.5);
+    const msg = correct
+        ? `Richtig! Seiten: 7 m + 15 m + √(15²+7²) = 7 + 15 + √274 ≈ 7 + 15 + 16,55 ≈ 38,55 m`
+        : 'Nicht korrekt. Tipp: Der Umfang = Summe aller drei Seiten. Die dritte Seite (CB) berechnen Sie mit dem Satz des Pythagoras: c = √(a²+b²).';
+    saveFb('A4c','fb4c','btn4c', correct, firstTry, correct&&firstTry?3:0, msg);
+    if(correct) document.getElementById('btn4c').disabled=true;
+}
+
+function submit4d() {
+    const ts = getTaskState('A4d');
+    const firstTry = !ts.submitted;
+    const s1 = document.querySelector('input[name="q4d1"]:checked');
+    const s2 = document.querySelector('input[name="q4d2"]:checked');
+    if (!s1 || !s2) {
+        const fb = document.getElementById('fb4d');
+        fb.className = 'feedback incorrect';
+        fb.innerHTML = '✗ Bitte wählen Sie für beide Aussagen eine Antwort.';
+        fb.style.display = 'block';
+        return;
+    }
+    // Aussage 1: Gesamtfläche = Steinfläche + Rasenfläche
+    // Stein: P,C,B → base=15, h=7 → A_stein = (15×7)/2 = 52.5 m²
+    // Rasen: 105 m²
+    // Gesamt = 52.5 + 105 = 157.5 m² < 210 → Trifft zu
+    // Aussage 2: Ein Drittel = 157.5/3 = 52.5 m² = Steinfläche → Trifft zu
+    const c1 = s1.value === 'yes'; // < 210 → true
+    const c2 = s2.value === 'yes'; // 1/3 → true
+    const allCorrect = c1 && c2;
+    let msg;
+    if (allCorrect) {
+        msg = 'Beide Aussagen richtig bewertet! Gesamtfläche = 52,5 + 105 = 157,5 m² < 210 m² (✓ trifft zu). Steinfläche = 52,5 m² = 157,5/3 (✓ trifft zu).';
+    } else {
+        let hints = [];
+        if (!c1) hints.push('Aussage 1: Berechnen Sie Stein- und Rasenfläche und addieren Sie sie. Ist die Summe kleiner als 210 m²?');
+        if (!c2) hints.push('Aussage 2: Berechnen Sie ein Drittel der Gesamtfläche und vergleichen Sie mit der Steinfläche.');
+        msg = 'Nicht alle Aussagen korrekt bewertet. ' + hints.join(' | ');
+    }
+    saveFb('A4d','fb4d','btn4d', allCorrect, firstTry, allCorrect&&firstTry?2:0, msg);
+    if(allCorrect) document.getElementById('btn4d').disabled=true;
+}
+
+(function restoreAll() {
+    [['A4a','fb4a','btn4a'],['A4b','fb4b','btn4b'],['A4c','fb4c','btn4c'],['A4d','fb4d','btn4d']].forEach(([id,fb,btn]) => {
+        const ts = getTaskState(id);
+        if (ts.submitted) {
+            const fbEl = document.getElementById(fb);
+            if (fbEl) { fbEl.className='feedback '+(ts.correct?'correct':'incorrect'); fbEl.innerHTML=ts.feedbackText||''; fbEl.style.display='block'; }
+            if (ts.correct) { const b=document.getElementById(btn); if(b) b.disabled=true; }
+        }
+    });
+})();
+</script>
+</body>
+</html>

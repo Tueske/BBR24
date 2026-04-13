@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgabe 3 – Quader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-header">
+    <a href="index.html" class="back-btn">← Übersicht</a>
+    <h2>Vergleichende Arbeit Mathematik 2023</h2>
+</div>
+<div class="task-page">
+    <div class="task-title">
+        Aufgabe 3: Quader
+        <span class="pts-badge">5 Punkte</span>
+    </div>
+
+    <p style="margin-bottom:12px;">Die Abbildung zeigt das Netz eines Quaders mit den Maßen: Länge = 6 cm, Breite = 3 cm, Höhe = 10 cm.</p>
+    <canvas id="quaderNetCanvas" width="520" height="220" style="display:block;margin:0 auto 20px;"></canvas>
+
+    <!-- 3a -->
+    <div class="subtask" id="sub3a">
+        <div class="subtask-header">
+            <div class="subtask-label">a) Wie groß ist der Flächeninhalt des grau schraffierten Rechtecks? Kreuzen Sie an.</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <div class="options">
+            <label class="option-label"><input type="radio" name="q3a" value="13"> 13 cm²</label>
+            <label class="option-label"><input type="radio" name="q3a" value="18"> 18 cm²</label>
+            <label class="option-label"><input type="radio" name="q3a" value="30"> 30 cm²</label>
+            <label class="option-label"><input type="radio" name="q3a" value="60"> 60 cm²</label>
+        </div>
+        <button class="submit-btn" id="btn3a" onclick="submit3a()">Antwort prüfen</button>
+        <div class="feedback" id="fb3a"></div>
+    </div>
+
+    <!-- 3b -->
+    <div class="subtask" id="sub3b">
+        <div class="subtask-header">
+            <div class="subtask-label">b) Wie groß ist das Volumen des Quaders? Berechnen Sie.</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <div class="work-area">
+            <label>Lösungsweg / Rechnung:</label>
+            <textarea id="work3b" rows="3" placeholder="z.B. V = l × b × h = ..."></textarea>
+        </div>
+        <div class="input-row">
+            <label>V =</label>
+            <input type="text" id="in3b" placeholder="?"> cm³
+        </div>
+        <button class="submit-btn" id="btn3b" onclick="submit3b()">Antwort prüfen</button>
+        <div class="feedback" id="fb3b"></div>
+    </div>
+
+    <!-- 3c* -->
+    <div class="subtask star-task" id="sub3c">
+        <div class="subtask-header">
+            <div class="subtask-label">c)* Kleine Würfel aus Holz haben eine Kantenlänge von 2,9 cm. Wie viele dieser kleinen Holzwürfel passen höchstens in den Quader?</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <div class="work-area">
+            <label>Lösungsweg / Rechnung:</label>
+            <textarea id="work3c" rows="4" placeholder="Tipp: Wie viele Würfel passen in jede Richtung?"></textarea>
+        </div>
+        <div class="input-row">
+            <label>Anzahl Würfel:</label>
+            <input type="text" id="in3c" placeholder="?">
+        </div>
+        <button class="submit-btn" id="btn3c" onclick="submit3c()">Antwort prüfen</button>
+        <div class="feedback" id="fb3c"></div>
+    </div>
+
+    <div class="nav-footer">
+        <a href="aufgabe2.html">← Aufgabe 2</a>
+        <a href="aufgabe4.html">Aufgabe 4 →</a>
+    </div>
+</div>
+<script src="exam.js"></script>
+<script>
+// ── Draw Quader net ──
+// Quader: l=6, b=3, h=10
+// Net layout (cross-like):
+//   [top: 6×3]
+//   [left:3×10][front:6×10][right:3×10][back:6×10]
+//   [bottom:6×3]
+// gray shaded = right face = 3×10 = 30 cm²
+(function drawNet() {
+    const canvas = document.getElementById('quaderNetCanvas');
+    const ctx = canvas.getContext('2d');
+    const S = 14; // scale factor
+    const l = 6*S, b = 3*S, h = 10*S;
+    const ox = 60, oy = 20;
+
+    // Faces layout:
+    // Top (6×3): ox+b, oy
+    // Left (3×10): ox, oy+b
+    // Front (6×10): ox+b, oy+b
+    // Right (3×10): ox+b+l, oy+b  ← GRAY
+    // Back (6×10): ox+b+l+b, oy+b
+    // Bottom (6×3): ox+b, oy+b+h
+
+    const faces = [
+        { x: ox+b,       y: oy,      w: l, h: b, gray: false, label: '6×3' },
+        { x: ox,         y: oy+b,    w: b, h: h, gray: false, label: '3×10' },
+        { x: ox+b,       y: oy+b,    w: l, h: h, gray: false, label: '6×10' },
+        { x: ox+b+l,     y: oy+b,    w: b, h: h, gray: true,  label: '3×10' },
+        { x: ox+b+l+b,   y: oy+b,    w: l, h: h, gray: false, label: '6×10' },
+        { x: ox+b,       y: oy+b+h,  w: l, h: b, gray: false, label: '6×3' },
+    ];
+
+    faces.forEach(f => {
+        ctx.fillStyle = f.gray ? '#aaa' : '#e8e8e8';
+        ctx.fillRect(f.x, f.y, f.w, f.h);
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(f.x, f.y, f.w, f.h);
+    });
+
+    // Dimension labels on the right side
+    ctx.fillStyle = '#333';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'left';
+    const rx = ox + b + l + b + l + 10;
+    // 3 cm top
+    ctx.fillText('3 cm', rx, oy + b/2 + 4);
+    // 10 cm middle
+    ctx.fillText('10 cm', rx, oy + b + h/2 + 4);
+    // 3 cm bottom
+    ctx.fillText('3 cm', rx, oy + b + h + b/2 + 4);
+    // 6 cm below bottom face
+    ctx.textAlign = 'center';
+    ctx.fillText('6 cm', ox + b + l/2, oy + b + h + b + 16);
+
+    // Bracket lines for dimensions
+    ctx.strokeStyle = '#666';
+    ctx.lineWidth = 1;
+    function bracket(x1, y1, x2, y2, label) {}
+})();
+
+function submit3a() {
+    const ts = getTaskState('A3a');
+    const firstTry = !ts.submitted;
+    const sel = document.querySelector('input[name="q3a"]:checked');
+    if (!sel) { showFeedback('fb3a', false, 'Bitte wählen Sie eine Antwort.', 0); return; }
+    // Gray face = right side = 3 × 10 = 30 cm²
+    const correct = sel.value === '30';
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! Das schraffierte Rechteck ist die Seitenfläche mit den Maßen 3 cm × 10 cm = 30 cm²';
+        if (firstTry) pts = 1;
+        document.getElementById('btn3a').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Das schraffierte Rechteck hat die Breite 3 cm und die Höhe 10 cm des Quaders.';
+    }
+    saveFeedback('A3a', 'fb3a', 'btn3a', correct, firstTry, pts, msg);
+}
+
+function submit3b() {
+    const ts = getTaskState('A3b');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in3b').value);
+    // V = 6 × 3 × 10 = 180
+    const correct = approxEqual(val, 180, 0.5);
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! V = Länge × Breite × Höhe = 6 × 3 × 10 = 180 cm³';
+        if (firstTry) pts = 2;
+        document.getElementById('btn3b').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: V = Länge × Breite × Höhe. Die Maße des Quaders sind 6 cm, 3 cm und 10 cm.';
+    }
+    saveFeedback('A3b', 'fb3b', 'btn3b', correct, firstTry, pts, msg);
+}
+
+function submit3c() {
+    const ts = getTaskState('A3c');
+    const firstTry = !ts.submitted;
+    const val = parseInt(document.getElementById('in3c').value);
+    // Along l=6: floor(6/2.9)=2, along b=3: floor(3/2.9)=1, along h=10: floor(10/2.9)=3
+    // Total = 2×1×3 = 6
+    const correct = val === 6;
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! In Längsrichtung: ⌊6÷2,9⌋=2, in Breitenrichtung: ⌊3÷2,9⌋=1, in Höhenrichtung: ⌊10÷2,9⌋=3. Gesamt: 2×1×3 = 6 Würfel.';
+        if (firstTry) pts = 2;
+        document.getElementById('btn3c').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Berechnen Sie, wie viele Würfel (Kantenlänge 2,9 cm) in jede Richtung des Quaders passen. Verwenden Sie dazu ganzzahlige Division (abrunden!).';
+    }
+    saveFeedback('A3c', 'fb3c', 'btn3c', correct, firstTry, pts, msg);
+}
+
+function saveFeedback(id, fbId, btnId, correct, firstTry, pts, msg) {
+    const ts = getTaskState(id);
+    const earnedPts = firstTry && correct ? pts : (ts.points || 0);
+    const badge = correct && earnedPts > 0 ? ` <span class="points-earned">+${earnedPts} Punkt${earnedPts!==1?'e':''}</span>` : '';
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + badge;
+    setTaskState(id, { submitted: true, correct, points: earnedPts, feedbackText: fbText });
+    const fb = document.getElementById(fbId);
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+(function restoreAll() {
+    [['A3a','fb3a','btn3a'],['A3b','fb3b','btn3b'],['A3c','fb3c','btn3c']].forEach(([id,fb,btn]) => {
+        const ts = getTaskState(id);
+        if (ts.submitted) {
+            const fbEl = document.getElementById(fb);
+            if (fbEl) { fbEl.className='feedback '+(ts.correct?'correct':'incorrect'); fbEl.innerHTML=ts.feedbackText||''; fbEl.style.display='block'; }
+            if (ts.correct) { const b=document.getElementById(btn); if(b) b.disabled=true; }
+        }
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgabe 6 – Berliner Strom</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-header">
+    <a href="index.html" class="back-btn">← Übersicht</a>
+    <h2>Vergleichende Arbeit Mathematik 2023</h2>
+</div>
+<div class="task-page">
+    <div class="task-title">
+        Aufgabe 6: Berliner Strom
+        <span class="pts-badge">6 Punkte</span>
+    </div>
+
+    <p style="margin-bottom:12px;">Der Strom für Berlin wird aus verschiedenen Energieträgern erzeugt. Die folgende Tabelle zeigt die Angaben für das Jahr 2020.</p>
+
+    <table style="max-width:420px;margin-bottom:16px;">
+        <thead>
+            <tr><th style="text-align:left;">Energieträger</th><th>Strommenge</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Erdgas</td><td>4516 GWh</td></tr>
+            <tr><td>Steinkohle</td><td>1937 GWh</td></tr>
+            <tr><td>Heizöl</td><td>18 GWh</td></tr>
+            <tr><td>Sonstige fossile Energieträger</td><td>415 GWh</td></tr>
+            <tr><td>Erneuerbare Energieträger</td><td>405 GWh</td></tr>
+            <tr><td><strong>Summe</strong></td><td><strong>7291 GWh</strong></td></tr>
+        </tbody>
+    </table>
+
+    <!-- 6a: Balkendiagramm -->
+    <div class="subtask" id="sub6a">
+        <div class="subtask-header">
+            <div class="subtask-label">a) Ergänzen Sie den Balken für „Steinkohle" und beschriften Sie die x-Achse.</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <p style="font-size:0.9rem;color:#555;margin-bottom:8px;">
+            Ziehen Sie den Schieberegler, um den Balken für Steinkohle auf den richtigen Wert zu setzen. Tragen Sie außerdem die Achsenbeschriftung ein.
+        </p>
+        <canvas id="barCanvas" width="540" height="280" style="display:block;margin:0 auto;border:1px solid #ddd;border-radius:4px;"></canvas>
+        <div style="margin:10px 0;">
+            <label>Steinkohle-Wert (GWh): <input type="range" id="steinkohleSlider" min="0" max="5000" value="0" step="10" oninput="updateBarChart()"> <span id="steinkohleVal">0</span> GWh</label>
+        </div>
+        <div class="input-row">
+            <label>Beschriftung x-Achse:</label>
+            <input type="text" id="in6a_axis" placeholder="z.B. Strommenge in GWh" style="max-width:280px;">
+        </div>
+        <button class="submit-btn" id="btn6a" onclick="submit6a()">Antwort prüfen</button>
+        <div class="feedback" id="fb6a"></div>
+    </div>
+
+    <!-- 6b -->
+    <div class="subtask" id="sub6b">
+        <div class="subtask-header">
+            <div class="subtask-label">b) Wie viel Prozent des 2020 erzeugten Stromes stammten aus erneuerbaren Energieträgern? Berechnen Sie.</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <div class="work-area">
+            <label>Lösungsweg:</label>
+            <textarea id="work6b" rows="3" placeholder="405 / 7291 × 100 = ..."></textarea>
+        </div>
+        <div class="input-row">
+            <label>Anteil ≈</label>
+            <input type="text" id="in6b" placeholder="?"> %
+        </div>
+        <button class="submit-btn" id="btn6b" onclick="submit6b()">Antwort prüfen</button>
+        <div class="feedback" id="fb6b"></div>
+    </div>
+
+    <!-- 6c*: Kreisdiagramm -->
+    <div class="subtask star-task" id="sub6c">
+        <div class="subtask-header">
+            <div class="subtask-label">c)* Die Aufteilung der erneuerbaren Energien soll in einem Kreisdiagramm dargestellt werden. Ergänzen Sie die fehlenden Anteile (Photovoltaik und Biomasse) und beschriften Sie.</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <p style="font-size:0.9rem;color:#555;margin-bottom:8px;">
+            Windkraft: 7% (bereits eingezeichnet). Tragen Sie die Winkel für Photovoltaik (25%) und Biomasse (68%) ein, indem Sie die Schieberegler verstellen.
+        </p>
+        <canvas id="pieCanvas" width="400" height="300" style="display:block;margin:0 auto;border:1px solid #ddd;border-radius:4px;"></canvas>
+        <div style="margin:10px 0;display:flex;flex-direction:column;gap:8px;">
+            <label>Photovoltaik-Anteil (%): <input type="range" id="pvSlider" min="0" max="60" value="0" step="1" oninput="updatePie()"> <span id="pvVal">0</span>%</label>
+            <label>Biomasse-Anteil (%): <input type="range" id="bmSlider" min="0" max="100" value="0" step="1" oninput="updatePie()"> <span id="bmVal">0</span>%</label>
+        </div>
+        <button class="submit-btn" id="btn6c" onclick="submit6c()">Antwort prüfen</button>
+        <div class="feedback" id="fb6c"></div>
+    </div>
+
+    <div class="nav-footer">
+        <a href="aufgabe5.html">← Aufgabe 5</a>
+        <a href="aufgabe7.html">Aufgabe 7 →</a>
+    </div>
+</div>
+<script src="exam.js"></script>
+<script>
+// ── Bar Chart ──
+const BAR_DATA = [
+    { label: 'Erdgas',                    val: 4516, color: '#555' },
+    { label: 'Steinkohle',                val: 1937, color: '#888', user: true },
+    { label: 'Heizöl',                    val: 18,   color: '#aaa' },
+    { label: 'Sonstige fossile',          val: 415,  color: '#777' },
+    { label: 'Erneuerbare',              val: 405,  color: '#4a4' },
+];
+
+let steinkohleUserVal = 0;
+
+function updateBarChart() {
+    steinkohleUserVal = parseInt(document.getElementById('steinkohleSlider').value);
+    document.getElementById('steinkohleVal').textContent = steinkohleUserVal;
+    drawBarChart();
+}
+
+function drawBarChart() {
+    const canvas = document.getElementById('barCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+
+    const PAD = { left: 160, right: 20, top: 30, bottom: 40 };
+    const chartW = W - PAD.left - PAD.right;
+    const chartH = H - PAD.top - PAD.bottom;
+    const MAX_VAL = 5000;
+    const BAR_H = 30, BAR_GAP = 14;
+
+    // Title
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 13px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('So produziert Berlin Strom', W / 2, 18);
+
+    // Bars
+    BAR_DATA.forEach((d, i) => {
+        const y = PAD.top + i * (BAR_H + BAR_GAP);
+        const displayVal = d.user ? steinkohleUserVal : d.val;
+        const barW = (displayVal / MAX_VAL) * chartW;
+
+        ctx.fillStyle = d.color;
+        ctx.fillRect(PAD.left, y, barW, BAR_H);
+
+        // Label
+        ctx.fillStyle = '#333';
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'right';
+        ctx.fillText(d.label, PAD.left - 6, y + BAR_H / 2 + 4);
+
+        // Value
+        if (displayVal > 0) {
+            ctx.fillStyle = '#333';
+            ctx.textAlign = 'left';
+            ctx.font = '11px Arial';
+            ctx.fillText(displayVal + ' GWh', PAD.left + barW + 4, y + BAR_H / 2 + 4);
+        }
+    });
+
+    // x-axis
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 1.5;
+    const axisY = PAD.top + BAR_DATA.length * (BAR_H + BAR_GAP);
+    ctx.beginPath();
+    ctx.moveTo(PAD.left, axisY);
+    ctx.lineTo(W - PAD.right, axisY);
+    ctx.stroke();
+
+    // x ticks
+    for (let v = 0; v <= MAX_VAL; v += 500) {
+        const px = PAD.left + (v / MAX_VAL) * chartW;
+        ctx.beginPath();
+        ctx.moveTo(px, axisY);
+        ctx.lineTo(px, axisY + 5);
+        ctx.stroke();
+        ctx.fillStyle = '#333';
+        ctx.font = '11px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(v, px, axisY + 17);
+    }
+
+    // x-axis label placeholder
+    ctx.fillStyle = '#c00';
+    ctx.font = 'italic 11px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('← Achsenbeschriftung (unten eingeben)', PAD.left + chartW / 2, H - 4);
+}
+
+drawBarChart();
+
+// ── Pie Chart ──
+let pvPct = 0, bmPct = 0;
+const WIND_PCT = 7;
+
+function updatePie() {
+    pvPct = parseInt(document.getElementById('pvSlider').value);
+    bmPct = parseInt(document.getElementById('bmSlider').value);
+    document.getElementById('pvVal').textContent = pvPct;
+    document.getElementById('bmVal').textContent = bmPct;
+    drawPie();
+}
+
+function drawPie() {
+    const canvas = document.getElementById('pieCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+
+    const cx = 160, cy = H / 2, r = 110;
+    const remaining = 100 - WIND_PCT - pvPct - bmPct;
+
+    const segments = [
+        { pct: WIND_PCT, color: '#888',   label: 'Windkraft 7%' },
+        { pct: pvPct,    color: '#f5a623', label: `Photovoltaik ${pvPct}%` },
+        { pct: bmPct,    color: '#4a8a4a', label: `Biomasse ${bmPct}%` },
+        { pct: Math.max(0, remaining), color: '#eee', label: remaining > 0 ? `Offen ${remaining}%` : '' },
+    ];
+
+    let startAngle = -Math.PI / 2;
+    segments.forEach(seg => {
+        if (seg.pct <= 0) return;
+        const angle = (seg.pct / 100) * Math.PI * 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r, startAngle, startAngle + angle);
+        ctx.closePath();
+        ctx.fillStyle = seg.color;
+        ctx.fill();
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Label line
+        const midAngle = startAngle + angle / 2;
+        const lx = cx + Math.cos(midAngle) * (r + 20);
+        const ly = cy + Math.sin(midAngle) * (r + 20);
+        ctx.strokeStyle = '#555';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(midAngle) * r, cy + Math.sin(midAngle) * r);
+        ctx.lineTo(lx, ly);
+        ctx.stroke();
+
+        startAngle += angle;
+    });
+
+    // Legend
+    const legendX = cx + r + 30, legendY = 60;
+    ctx.font = '12px Arial';
+    segments.forEach((seg, i) => {
+        if (!seg.label) return;
+        ctx.fillStyle = seg.color;
+        ctx.fillRect(legendX, legendY + i * 24, 16, 16);
+        ctx.fillStyle = '#333';
+        ctx.textAlign = 'left';
+        ctx.fillText(seg.label, legendX + 22, legendY + i * 24 + 12);
+    });
+
+    // Remaining warning
+    if (remaining < 0) {
+        ctx.fillStyle = '#c00';
+        ctx.font = 'bold 12px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Summe > 100%!', cx, cy + r + 30);
+    }
+}
+drawPie();
+
+// ── Submissions ──
+function saveFb(id, fbId, btnId, correct, firstTry, pts, msg) {
+    const ts = getTaskState(id);
+    const earnedPts = firstTry && correct ? pts : (ts.points || 0);
+    const badge = correct && earnedPts > 0 ? ` <span class="points-earned">+${earnedPts} Punkt${earnedPts!==1?'e':''}</span>` : '';
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + badge;
+    setTaskState(id, { submitted: true, correct, points: earnedPts, feedbackText: fbText });
+    const fb = document.getElementById(fbId);
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+function submit6a() {
+    const ts = getTaskState('A6a');
+    const firstTry = !ts.submitted;
+    const sliderOk = approxEqual(steinkohleUserVal, 1937, 50);
+    const axisText = document.getElementById('in6a_axis').value.trim().toLowerCase();
+    const axisOk = axisText.length > 4 && (axisText.includes('gwh') || axisText.includes('strom') || axisText.includes('menge'));
+    const correct = sliderOk && axisOk;
+    let msg;
+    if (correct) {
+        msg = 'Richtig! Steinkohle: 1937 GWh. Die x-Achse zeigt die Strommenge in GWh.';
+    } else {
+        let h = [];
+        if (!sliderOk) h.push('Schieberegler: Steinkohle hat 1937 GWh — setzen Sie den Balken auf diesen Wert.');
+        if (!axisOk)   h.push('x-Achse: Beschriften Sie die Achse z.B. mit „Strommenge in GWh".');
+        msg = h.join(' | ');
+    }
+    saveFb('A6a','fb6a','btn6a', correct, firstTry, correct&&firstTry?2:0, msg);
+    if (correct) document.getElementById('btn6a').disabled = true;
+}
+
+function submit6b() {
+    const ts = getTaskState('A6b');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in6b').value);
+    // 405/7291*100 ≈ 5.55%
+    const correct = approxEqual(val, 405 / 7291 * 100, 0.2);
+    const msg = correct
+        ? 'Richtig! 405 / 7291 × 100 ≈ 5,55 %'
+        : 'Nicht korrekt. Tipp: Anteil = (Erneuerbare / Gesamt) × 100 = (405 / 7291) × 100';
+    saveFb('A6b','fb6b','btn6b', correct, firstTry, correct&&firstTry?2:0, msg);
+    if (correct) document.getElementById('btn6b').disabled = true;
+}
+
+function submit6c() {
+    const ts = getTaskState('A6c');
+    const firstTry = !ts.submitted;
+    const pvOk = approxEqual(pvPct, 25, 2);
+    const bmOk = approxEqual(bmPct, 68, 2);
+    const correct = pvOk && bmOk;
+    let msg;
+    if (correct) {
+        msg = 'Richtig! Windkraft: 7%, Photovoltaik: 25%, Biomasse: 68%. Summe = 100%.';
+    } else {
+        let h = [];
+        if (!pvOk) h.push('Photovoltaik sollte 25% betragen.');
+        if (!bmOk) h.push('Biomasse sollte 68% betragen.');
+        msg = h.join(' | ') + ' Tipp: Die drei Anteile müssen zusammen 100% ergeben.';
+    }
+    saveFb('A6c','fb6c','btn6c', correct, firstTry, correct&&firstTry?2:0, msg);
+    if (correct) document.getElementById('btn6c').disabled = true;
+}
+
+(function restoreAll() {
+    [['A6a','fb6a','btn6a'],['A6b','fb6b','btn6b'],['A6c','fb6c','btn6c']].forEach(([id,fb,btn]) => {
+        const ts = getTaskState(id);
+        if (ts.submitted) {
+            const fbEl = document.getElementById(fb);
+            if (fbEl) { fbEl.className='feedback '+(ts.correct?'correct':'incorrect'); fbEl.innerHTML=ts.feedbackText||''; fbEl.style.display='block'; }
+            if (ts.correct) { const b=document.getElementById(btn); if(b) b.disabled=true; }
+        }
+    });
+    // Restore slider
+    const ts6a = getTaskState('A6a');
+    if (ts6a.submitted && ts6a.correct) {
+        document.getElementById('steinkohleSlider').value = 1937;
+        steinkohleUserVal = 1937;
+        document.getElementById('steinkohleVal').textContent = 1937;
+        drawBarChart();
+    }
+    const ts6c = getTaskState('A6c');
+    if (ts6c.submitted && ts6c.correct) {
+        document.getElementById('pvSlider').value = 25; pvPct = 25;
+        document.getElementById('pvVal').textContent = 25;
+        document.getElementById('bmSlider').value = 68; bmPct = 68;
+        document.getElementById('bmVal').textContent = 68;
+        drawPie();
+    }
+})();
+</script>
+</body>
+</html>

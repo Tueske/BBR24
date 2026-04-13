@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgabe 1 – Basisaufgaben</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-header">
+    <a href="index.html" class="back-btn">← Übersicht</a>
+    <h2>Vergleichende Arbeit Mathematik 2023</h2>
+</div>
+<div class="task-page">
+    <div class="task-title">
+        Aufgabe 1: Basisaufgaben
+        <span class="pts-badge">11 Punkte</span>
+    </div>
+
+    <!-- 1a: Zahlenstrahl -->
+    <div class="subtask" id="sub1a">
+        <div class="subtask-header">
+            <div class="subtask-label">a) Wo liegt die Zahl -24 auf dem Zahlenstrahl?<br>Markieren Sie die richtige Stelle.</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <canvas id="numberLineCanvas" width="560" height="80"></canvas>
+        <p style="font-size:0.9rem;color:#666;margin-top:4px;">Tippen Sie auf die Stelle im Zahlenstrahl, wo -24 liegt.</p>
+        <button class="submit-btn" id="btn1a" onclick="submit1a()">Antwort prüfen</button>
+        <div class="feedback" id="fb1a"></div>
+    </div>
+
+    <!-- 1b: Bruch Rechteck -->
+    <div class="subtask" id="sub1b">
+        <div class="subtask-header">
+            <div class="subtask-label">b) Welcher Anteil des Rechtecks ist grau eingefärbt?</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <canvas id="rectCanvas" width="200" height="200" class="fraction-grid-canvas"></canvas>
+        <div class="options" id="opts1b">
+            <label class="option-label"><input type="radio" name="q1b" value="1/2"> 1/2</label>
+            <label class="option-label"><input type="radio" name="q1b" value="1/3"> 1/3</label>
+            <label class="option-label"><input type="radio" name="q1b" value="1/4"> 1/4</label>
+            <label class="option-label"><input type="radio" name="q1b" value="1/5"> 1/5</label>
+        </div>
+        <button class="submit-btn" id="btn1b" onclick="submit1b()">Antwort prüfen</button>
+        <div class="feedback" id="fb1b"></div>
+    </div>
+
+    <!-- 1c: Käse -->
+    <div class="subtask" id="sub1c">
+        <div class="subtask-header">
+            <div class="subtask-label">c) Im Supermarkt kosten 100 g Käse 1,40 €. Wieviel kosten 250 g Käse?</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <div class="input-row">
+            <label>250 g Käse kosten:</label>
+            <input type="text" id="in1c" placeholder="z.B. 3,50"> €
+        </div>
+        <button class="submit-btn" id="btn1c" onclick="submit1c()">Antwort prüfen</button>
+        <div class="feedback" id="fb1c"></div>
+    </div>
+
+    <!-- 1d: Umrechnung -->
+    <div class="subtask" id="sub1d">
+        <div class="subtask-header">
+            <div class="subtask-label">d) Rechnen Sie um:</div>
+            <div class="subtask-pts">(3 P)</div>
+        </div>
+        <div class="input-row">
+            <label>½ kg =</label>
+            <input type="text" id="in1d1" placeholder="?"> g
+        </div>
+        <div class="input-row">
+            <label>705 cm =</label>
+            <input type="text" id="in1d2" placeholder="?"> m
+        </div>
+        <div class="input-row">
+            <label>2,5 Jahre =</label>
+            <input type="text" id="in1d3" placeholder="?"> Monate
+        </div>
+        <button class="submit-btn" id="btn1d" onclick="submit1d()">Antwort prüfen</button>
+        <div class="feedback" id="fb1d"></div>
+    </div>
+
+    <!-- 1e: Gleichung -->
+    <div class="subtask" id="sub1e">
+        <div class="subtask-header">
+            <div class="subtask-label">e) Gegeben ist die Gleichung 5·x – 2 = 10 + 3·x. Welche Zahl ist die Lösung?</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <div class="options" id="opts1e">
+            <label class="option-label"><input type="radio" name="q1e" value="x=-6"> x = -6</label>
+            <label class="option-label"><input type="radio" name="q1e" value="x=-2"> x = -2</label>
+            <label class="option-label"><input type="radio" name="q1e" value="x=6"> x = 6</label>
+            <label class="option-label"><input type="radio" name="q1e" value="x=10"> x = 10</label>
+        </div>
+        <button class="submit-btn" id="btn1e" onclick="submit1e()">Antwort prüfen</button>
+        <div class="feedback" id="fb1e"></div>
+    </div>
+
+    <!-- 1f: Gleichung Äpfel/Birnen -->
+    <div class="subtask" id="sub1f">
+        <div class="subtask-header">
+            <div class="subtask-label">f) Maria kauft Äpfel und Birnen, insgesamt 27 Stück. Es sind doppelt so viele Birnen wie Äpfel.<br>Welche Gleichung passt?</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <div class="options" id="opts1f">
+            <label class="option-label"><input type="radio" name="q1f" value="a"> x + (x+2) = 27</label>
+            <label class="option-label"><input type="radio" name="q1f" value="b"> x + 2·x = 27</label>
+            <label class="option-label"><input type="radio" name="q1f" value="c"> x·(x+2) = 27</label>
+        </div>
+        <button class="submit-btn" id="btn1f" onclick="submit1f()">Antwort prüfen</button>
+        <div class="feedback" id="fb1f"></div>
+    </div>
+
+    <!-- 1g: Dreieck Flächeninhalt -->
+    <div class="subtask" id="sub1g">
+        <div class="subtask-header">
+            <div class="subtask-label">g) Wie groß ist der Flächeninhalt des abgebildeten Dreiecks? (Seiten: 5 cm, 12 cm, Basis: 13 cm, Höhe: 5 cm)</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <canvas id="triangleCanvas" width="300" height="130"></canvas>
+        <div class="options" id="opts1g">
+            <label class="option-label"><input type="radio" name="q1g" value="18"> 18 cm²</label>
+            <label class="option-label"><input type="radio" name="q1g" value="30"> 30 cm²</label>
+            <label class="option-label"><input type="radio" name="q1g" value="32.5"> 32,5 cm²</label>
+            <label class="option-label"><input type="radio" name="q1g" value="60"> 60 cm²</label>
+        </div>
+        <button class="submit-btn" id="btn1g" onclick="submit1g()">Antwort prüfen</button>
+        <div class="feedback" id="fb1g"></div>
+    </div>
+
+    <!-- 1h: Kreisumfang -->
+    <div class="subtask" id="sub1h">
+        <div class="subtask-header">
+            <div class="subtask-label">h) Ein Kreis hat einen Durchmesser von 6 cm. Wie groß ist der Umfang des Kreises?</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <canvas id="circleCanvas" width="180" height="120"></canvas>
+        <div class="input-row">
+            <label>U ≈</label>
+            <input type="text" id="in1h" placeholder="z.B. 18,85"> cm
+        </div>
+        <button class="submit-btn" id="btn1h" onclick="submit1h()">Antwort prüfen</button>
+        <div class="feedback" id="fb1h"></div>
+    </div>
+
+    <!-- 1i: Rechteck Höhe -->
+    <div class="subtask" id="sub1i">
+        <div class="subtask-header">
+            <div class="subtask-label">i) Das Rechteck hat einen Flächeninhalt von 200 cm². Die Breite beträgt 25 cm. Wie groß ist die Höhe?</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <canvas id="rectHeightCanvas" width="220" height="120"></canvas>
+        <div class="input-row">
+            <label>h =</label>
+            <input type="text" id="in1i" placeholder="?"> cm
+        </div>
+        <button class="submit-btn" id="btn1i" onclick="submit1i()">Antwort prüfen</button>
+        <div class="feedback" id="fb1i"></div>
+    </div>
+
+    <div class="nav-footer">
+        <a href="index.html">← Übersicht</a>
+        <a href="aufgabe2.html">Aufgabe 2 →</a>
+    </div>
+</div>
+
+<script src="exam.js"></script>
+<script>
+// ── Number Line ──
+const NL_MIN = -30, NL_MAX = 30;
+let nlMarkerX = null;
+let nlCanvas, nlCtx;
+
+function drawNumberLine(markerVal) {
+    nlCanvas = document.getElementById('numberLineCanvas');
+    nlCtx = nlCanvas.getContext('2d');
+    const W = nlCanvas.width, H = nlCanvas.height;
+    nlCtx.clearRect(0, 0, W, H);
+    const PAD = 30;
+    const lineY = H / 2 + 10;
+    const lineW = W - 2 * PAD;
+
+    function valToX(v) {
+        return PAD + ((v - NL_MIN) / (NL_MAX - NL_MIN)) * lineW;
+    }
+
+    // Line
+    nlCtx.beginPath();
+    nlCtx.moveTo(PAD, lineY);
+    nlCtx.lineTo(W - PAD + 10, lineY);
+    nlCtx.lineWidth = 2;
+    nlCtx.strokeStyle = '#333';
+    nlCtx.stroke();
+    // Arrow
+    nlCtx.beginPath();
+    nlCtx.moveTo(W - PAD + 10, lineY);
+    nlCtx.lineTo(W - PAD + 2, lineY - 5);
+    nlCtx.lineTo(W - PAD + 2, lineY + 5);
+    nlCtx.fillStyle = '#333';
+    nlCtx.fill();
+
+    // Ticks and labels
+    for (let v = NL_MIN; v <= NL_MAX; v++) {
+        const x = valToX(v);
+        const isMajor = v % 10 === 0;
+        const isMed = v % 5 === 0;
+        nlCtx.beginPath();
+        nlCtx.moveTo(x, lineY - (isMajor ? 10 : isMed ? 6 : 3));
+        nlCtx.lineTo(x, lineY + (isMajor ? 10 : isMed ? 6 : 3));
+        nlCtx.lineWidth = isMajor ? 2 : 1;
+        nlCtx.strokeStyle = '#333';
+        nlCtx.stroke();
+        if (isMajor) {
+            nlCtx.fillStyle = '#333';
+            nlCtx.font = '13px Arial';
+            nlCtx.textAlign = 'center';
+            nlCtx.fillText(v, x, lineY + 24);
+        }
+    }
+
+    // Marker
+    if (markerVal !== null) {
+        const mx = valToX(markerVal);
+        nlCtx.beginPath();
+        nlCtx.arc(mx, lineY, 8, 0, Math.PI * 2);
+        nlCtx.fillStyle = '#c00';
+        nlCtx.fill();
+        nlCtx.fillStyle = 'white';
+        nlCtx.font = 'bold 10px Arial';
+        nlCtx.textAlign = 'center';
+        nlCtx.fillText('▼', mx, lineY + 4);
+    }
+}
+
+drawNumberLine(null);
+
+nlCanvas = document.getElementById('numberLineCanvas');
+nlCanvas.addEventListener('click', function(e) {
+    const ts = getTaskState('A1a');
+    if (ts.correct) return;
+    const rect = nlCanvas.getBoundingClientRect();
+    const scaleX = nlCanvas.width / rect.width;
+    const px = (e.clientX - rect.left) * scaleX;
+    const PAD = 30;
+    const lineW = nlCanvas.width - 2 * PAD;
+    const val = NL_MIN + ((px - PAD) / lineW) * (NL_MAX - NL_MIN);
+    nlMarkerX = Math.round(val);
+    drawNumberLine(nlMarkerX);
+});
+
+function submit1a() {
+    const ts = getTaskState('A1a');
+    const firstTry = !ts.submitted;
+    if (nlMarkerX === null) {
+        showFeedback('fb1a', false, 'Bitte markieren Sie eine Stelle auf dem Zahlenstrahl.', 0);
+        return;
+    }
+    const correct = nlMarkerX === -24;
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! -24 liegt zwischen -30 und -20, näher an -20.';
+        if (firstTry) pts = 1;
+        document.getElementById('btn1a').disabled = true;
+    } else {
+        msg = 'Nicht ganz. Tipp: -24 liegt zwischen -30 und -20. Schauen Sie genau hin und versuchen Sie es nochmal.';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkt</span>` : '');
+    setTaskState('A1a', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText, answer: nlMarkerX });
+    const fb = document.getElementById('fb1a');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+// ── Rectangle fraction ──
+function drawRectFraction() {
+    const canvas = document.getElementById('rectCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    const cols = 5, rows = 5;
+    const cw = W / cols, ch = H / rows;
+
+    // Gray cells from the exam image: 5 columns, 5 rows
+    // Looking at the image: roughly 1/4 of cells are gray (5 out of 20 visible = 1/4)
+    // The grid is 5x5=25 cells, gray appears to be about 5 cells = 1/5? 
+    // Based on original: appears to be a 4x5 grid with some gray cells
+    // Let's use a 4x5 grid (4 cols, 5 rows = 20 cells), 5 gray = 1/4
+    // Actually from the image it looks like a 5-column, 4-row grid with specific gray pattern
+    // The answer is 1/4. We'll draw accordingly.
+    const COLS = 4, ROWS = 4;
+    const CW = W / COLS, CH = H / ROWS;
+    // Gray cells: 4 out of 16 = 1/4
+    const grayCells = [[0,0],[1,1],[2,2],[3,3]]; // diagonal = 4/16 = 1/4
+    // Actually let's use the column pattern from exam - col 1 and 3 certain rows
+    // From image analysis: 5 gray cells in a 5x4=20 grid = 1/4 (5/20)
+    // Let me use 5 cols x 4 rows = 20, with 5 gray = 1/4
+    const COLS2 = 5, ROWS2 = 4;
+    const CW2 = W / COLS2, CH2 = H / ROWS2;
+    const grayCells2 = [[1,0],[3,0],[1,2],[1,3],[3,3]]; // 5 cells = 5/20 = 1/4
+
+    for (let r = 0; r < ROWS2; r++) {
+        for (let c = 0; c < COLS2; c++) {
+            const isGray = grayCells2.some(([gc, gr]) => gc === c && gr === r);
+            ctx.fillStyle = isGray ? '#aaa' : 'white';
+            ctx.fillRect(c * CW2, r * CH2, CW2, CH2);
+            ctx.strokeStyle = '#333';
+            ctx.strokeRect(c * CW2, r * CH2, CW2, CH2);
+        }
+    }
+}
+drawRectFraction();
+
+function submit1b() {
+    const ts = getTaskState('A1b');
+    const firstTry = !ts.submitted;
+    const sel = document.querySelector('input[name="q1b"]:checked');
+    if (!sel) { showFeedback('fb1b', false, 'Bitte wählen Sie eine Antwort aus.', 0); return; }
+    const correct = sel.value === '1/4';
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! 5 von 20 Feldern sind grau eingefärbt, das entspricht 1/4.';
+        if (firstTry) pts = 1;
+        document.getElementById('btn1b').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Zählen Sie die grauen Felder und die Gesamtanzahl der Felder.';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkt</span>` : '');
+    setTaskState('A1b', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb1b');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+function submit1c() {
+    const ts = getTaskState('A1c');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in1c').value);
+    const correct = approxEqual(val, 3.5, 0.01);
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! 100g → 1,40 €, also 250g → 2,5 × 1,40 € = 3,50 €';
+        if (firstTry) pts = 1;
+        document.getElementById('btn1c').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Berechnen Sie zuerst den Preis für 1g und dann für 250g.';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkt</span>` : '');
+    setTaskState('A1c', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb1c');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+function submit1d() {
+    const ts = getTaskState('A1d');
+    const firstTry = !ts.submitted;
+    const v1 = parseGerman(document.getElementById('in1d1').value);
+    const v2 = parseGerman(document.getElementById('in1d2').value);
+    const v3 = parseGerman(document.getElementById('in1d3').value);
+    const c1 = approxEqual(v1, 500, 0.01);
+    const c2 = approxEqual(v2, 7.05, 0.01);
+    const c3 = approxEqual(v3, 30, 0.01);
+    const numCorrect = [c1, c2, c3].filter(Boolean).length;
+    const allCorrect = numCorrect === 3;
+    let pts = 0;
+    let msgs = [];
+    if (!c1) msgs.push('½ kg: 1 kg = 1000 g → ½ kg = 500 g');
+    if (!c2) msgs.push('705 cm: 1 m = 100 cm → 705 cm = 7,05 m');
+    if (!c3) msgs.push('2,5 Jahre: 1 Jahr = 12 Monate → 2,5 × 12 = 30 Monate');
+    let msg;
+    if (allCorrect) {
+        msg = 'Alle drei Umrechnungen sind richtig! (500 g | 7,05 m | 30 Monate)';
+        if (firstTry) pts = 3;
+        document.getElementById('btn1d').disabled = true;
+    } else {
+        msg = `${numCorrect} von 3 Umrechnungen korrekt. Hinweise: ${msgs.join(' | ')}`;
+    }
+    const fbText = (allCorrect ? '✓ ' : '✗ ') + msg + (allCorrect && pts > 0 ? ` <span class="points-earned">+${pts} Punkte</span>` : '');
+    setTaskState('A1d', { submitted: true, correct: allCorrect, points: firstTry && allCorrect ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb1d');
+    fb.className = 'feedback ' + (allCorrect ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+function submit1e() {
+    const ts = getTaskState('A1e');
+    const firstTry = !ts.submitted;
+    const sel = document.querySelector('input[name="q1e"]:checked');
+    if (!sel) { showFeedback('fb1e', false, 'Bitte wählen Sie eine Antwort.', 0); return; }
+    const correct = sel.value === 'x=6';
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! 5x – 2 = 10 + 3x → 2x = 12 → x = 6';
+        if (firstTry) pts = 1;
+        document.getElementById('btn1e').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Bringen Sie alle x auf eine Seite: 5x – 3x = 10 + 2';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkt</span>` : '');
+    setTaskState('A1e', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb1e');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+function submit1f() {
+    const ts = getTaskState('A1f');
+    const firstTry = !ts.submitted;
+    const sel = document.querySelector('input[name="q1f"]:checked');
+    if (!sel) { showFeedback('fb1f', false, 'Bitte wählen Sie eine Antwort.', 0); return; }
+    const correct = sel.value === 'b';
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! x steht für die Anzahl der Äpfel, 2·x für die Birnen → x + 2·x = 27';
+        if (firstTry) pts = 1;
+        document.getElementById('btn1f').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: x = Anzahl Äpfel. "Doppelt so viele Birnen" bedeutet 2·x Birnen. Wie viel ist zusammen?';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkt</span>` : '');
+    setTaskState('A1f', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb1f');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+// Triangle drawing
+function drawTriangle() {
+    const canvas = document.getElementById('triangleCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    // Triangle with base 13, left side 5 (height), right side 12
+    // Let's place it: bottom-left at (20, H-20), base 13 units wide
+    const scale = 14;
+    const bx = 20, by = H - 20;
+    const ex = bx + 13 * scale, ey = by;
+    // apex: based on the exam image the apex appears to be closer to the left side
+    // With sides 5 (left from apex to a point), 12 (right), base 13
+    // Actually: the triangle has a height drawn from apex. height appears to be 5 (left label)
+    // base = 13, the vertical height-like dimension is 5
+    // Let's compute: place apex at top
+    const ax = bx + 3 * scale, ay = by - 5 * scale;
+    
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(bx, by);
+    ctx.lineTo(ex, ey);
+    ctx.closePath();
+    ctx.fillStyle = '#ddd';
+    ctx.fill();
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = '#333';
+    ctx.font = '13px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('13 cm', (bx + ex) / 2, by + 18);
+    ctx.fillText('5 cm', ax - 22, (ay + by) / 2);
+    ctx.fillText('12 cm', (ax + ex) / 2 + 10, (ay + ey) / 2 - 8);
+    
+    // Height indicator
+    ctx.setLineDash([4, 3]);
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(ax, by);
+    ctx.strokeStyle = '#999';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#666';
+    ctx.font = '11px Arial';
+    ctx.fillText('h=5', ax + 14, (ay + by) / 2);
+}
+drawTriangle();
+
+function submit1g() {
+    const ts = getTaskState('A1g');
+    const firstTry = !ts.submitted;
+    const sel = document.querySelector('input[name="q1g"]:checked');
+    if (!sel) { showFeedback('fb1g', false, 'Bitte wählen Sie eine Antwort.', 0); return; }
+    // A = (g × h) / 2 = (13 × 5) / 2 = 32.5 cm²
+    const correct = sel.value === '32.5';
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! A = (Grundlinie × Höhe) / 2 = (13 × 5) / 2 = 32,5 cm²';
+        if (firstTry) pts = 1;
+        document.getElementById('btn1g').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Flächeninhalt Dreieck = (Grundlinie × Höhe) / 2. Die Grundlinie ist 13 cm, die Höhe ist 5 cm.';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkt</span>` : '');
+    setTaskState('A1g', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb1g');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+// Circle drawing
+function drawCircle() {
+    const canvas = document.getElementById('circleCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = 90, cy = 60, r = 45;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = '#ddd';
+    ctx.fill();
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    // diameter line
+    ctx.beginPath();
+    ctx.moveTo(cx - r, cy);
+    ctx.lineTo(cx + r, cy);
+    ctx.strokeStyle = '#c00';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = '#333';
+    ctx.font = '13px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('d = 6 cm', cx, cy + 16);
+}
+drawCircle();
+
+function submit1h() {
+    const ts = getTaskState('A1h');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in1h').value);
+    // U = π × d = π × 6 ≈ 18.85
+    const correct = approxEqual(val, 6 * Math.PI, 0.1);
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! U = π × d = π × 6 ≈ 18,85 cm';
+        if (firstTry) pts = 1;
+        document.getElementById('btn1h').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Umfang Kreis = π × Durchmesser. Der Durchmesser beträgt 6 cm.';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkt</span>` : '');
+    setTaskState('A1h', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb1h');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+// Rectangle height drawing
+function drawRectHeight() {
+    const canvas = document.getElementById('rectHeightCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const rx = 60, ry = 20, rw = 140, rh = 80;
+    ctx.fillStyle = '#eee';
+    ctx.fillRect(rx, ry, rw, rh);
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(rx, ry, rw, rh);
+    ctx.fillStyle = '#333';
+    ctx.font = '13px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('25 cm', rx + rw / 2, ry - 6);
+    ctx.textAlign = 'right';
+    ctx.fillText('h', rx - 8, ry + rh / 2 + 5);
+    // arrows for h
+    ctx.beginPath();
+    ctx.moveTo(rx - 5, ry);
+    ctx.lineTo(rx - 5, ry + rh);
+    ctx.strokeStyle = '#c00';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+}
+drawRectHeight();
+
+function submit1i() {
+    const ts = getTaskState('A1i');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in1i').value);
+    // A = b × h → h = A/b = 200/25 = 8
+    const correct = approxEqual(val, 8, 0.01);
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! h = A / b = 200 cm² / 25 cm = 8 cm';
+        if (firstTry) pts = 1;
+        document.getElementById('btn1i').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: A = Breite × Höhe → Höhe = Fläche / Breite = 200 / 25';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkt</span>` : '');
+    setTaskState('A1i', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb1i');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+// Restore all states on load
+(function restoreAll() {
+    const tasks = [
+        {id:'A1a', fb:'fb1a', btn:'btn1a'},
+        {id:'A1b', fb:'fb1b', btn:'btn1b'},
+        {id:'A1c', fb:'fb1c', btn:'btn1c'},
+        {id:'A1d', fb:'fb1d', btn:'btn1d'},
+        {id:'A1e', fb:'fb1e', btn:'btn1e'},
+        {id:'A1f', fb:'fb1f', btn:'btn1f'},
+        {id:'A1g', fb:'fb1g', btn:'btn1g'},
+        {id:'A1h', fb:'fb1h', btn:'btn1h'},
+        {id:'A1i', fb:'fb1i', btn:'btn1i'},
+    ];
+    for (const t of tasks) {
+        const ts = getTaskState(t.id);
+        if (ts.submitted) {
+            const fb = document.getElementById(t.fb);
+            if (fb) {
+                fb.className = 'feedback ' + (ts.correct ? 'correct' : 'incorrect');
+                fb.innerHTML = ts.feedbackText || '';
+                fb.style.display = 'block';
+            }
+            if (ts.correct) {
+                const btn = document.getElementById(t.btn);
+                if (btn) btn.disabled = true;
+            }
+        }
+    }
+    // restore number line
+    const ts1a = getTaskState('A1a');
+    if (ts1a.answer !== undefined) {
+        nlMarkerX = ts1a.answer;
+        drawNumberLine(nlMarkerX);
+    }
+    // restore radio selections
+    ['1b','1e','1f','1g'].forEach(x => {
+        const ts = getTaskState('A1' + x.charAt(1).toUpperCase() + x.slice(2));
+        // simpler: just skip restoring radio (they won't be saved)
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgabe 7 – Kuchen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-header">
+    <a href="index.html" class="back-btn">← Übersicht</a>
+    <h2>Vergleichende Arbeit Mathematik 2023</h2>
+</div>
+<div class="task-page">
+    <div class="task-title">
+        Aufgabe 7: Kuchen
+        <span class="pts-badge">8 Punkte</span>
+    </div>
+
+    <p style="margin-bottom:14px;">Für Schokoladenkuchen werden folgende Zutaten benötigt.</p>
+
+    <!-- Ingredient price table -->
+    <div style="overflow-x:auto;margin-bottom:20px;">
+    <table style="min-width:420px;">
+        <thead>
+            <tr>
+                <th></th>
+                <th>🌾 Mehl</th>
+                <th>🧈 Butter</th>
+                <th>🥚 Eier</th>
+                <th>🍫 Schokolade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Preis</strong></td>
+                <td>0,80 €<br><small>für 1 kg</small></td>
+                <td>3,00 €<br><small>für 250 g</small></td>
+                <td>2,40 €<br><small>für 6 Stück</small></td>
+                <td>1,60 €<br><small>für 200 g</small></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <!-- Recipe box -->
+    <div style="background:#fff8f0;border:2px solid #e0a060;border-radius:8px;padding:14px 20px;margin-bottom:20px;max-width:340px;">
+        <p style="font-weight:bold;margin-bottom:8px;">🍰 Zutaten für einen Schokoladenkuchen:</p>
+        <ul style="list-style:none;padding:0;line-height:2;">
+            <li>• 250 g Mehl</li>
+            <li>• 100 g Butter</li>
+            <li>• 3 Eier</li>
+            <li>• 100 g Schokolade</li>
+        </ul>
+    </div>
+
+    <!-- 7a -->
+    <div class="subtask" id="sub7a">
+        <div class="subtask-header">
+            <div class="subtask-label">a) Wie viel kostet 1 kg Schokolade?</div>
+            <div class="subtask-pts">(1 P)</div>
+        </div>
+        <p style="font-size:0.92rem;color:#555;margin-bottom:10px;">
+            Hinweis: 200 g Schokolade kosten 1,60 €.
+        </p>
+        <div class="input-row">
+            <label>1 kg Schokolade kostet:</label>
+            <input type="text" id="in7a" placeholder="z.B. 8,00"> €
+        </div>
+        <button class="submit-btn" id="btn7a" onclick="submit7a()">Antwort prüfen</button>
+        <div class="feedback" id="fb7a"></div>
+    </div>
+
+    <!-- 7b* -->
+    <div class="subtask star-task" id="sub7b">
+        <div class="subtask-header">
+            <div class="subtask-label">b)* Wie viel kosten die Zutaten für einen Schokoladenkuchen? Berechnen Sie.</div>
+            <div class="subtask-pts">(3 P)</div>
+        </div>
+        <p style="font-size:0.92rem;color:#555;margin-bottom:10px;">
+            Berechnen Sie die Kosten für jede Zutat einzeln und addieren Sie.
+        </p>
+
+        <!-- Step-by-step mini table -->
+        <table style="max-width:480px;margin-bottom:12px;">
+            <thead>
+                <tr><th>Zutat</th><th>Menge</th><th>Kosten (€)</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mehl</td>
+                    <td>250 g</td>
+                    <td><input type="text" id="cost_mehl" placeholder="?"> €</td>
+                </tr>
+                <tr>
+                    <td>Butter</td>
+                    <td>100 g</td>
+                    <td><input type="text" id="cost_butter" placeholder="?"> €</td>
+                </tr>
+                <tr>
+                    <td>Eier</td>
+                    <td>3 Stück</td>
+                    <td><input type="text" id="cost_eier" placeholder="?"> €</td>
+                </tr>
+                <tr>
+                    <td>Schokolade</td>
+                    <td>100 g</td>
+                    <td><input type="text" id="cost_schoko" placeholder="?"> €</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="work-area">
+            <label>Gesamtkosten (Summe aller Zutaten):</label>
+            <div class="input-row" style="margin-top:6px;">
+                <label>Gesamt =</label>
+                <input type="text" id="in7b" placeholder="?"> €
+            </div>
+        </div>
+        <button class="submit-btn" id="btn7b" onclick="submit7b()">Antwort prüfen</button>
+        <div class="feedback" id="fb7b"></div>
+    </div>
+
+    <!-- 7c -->
+    <div class="subtask" id="sub7c">
+        <div class="subtask-header">
+            <div class="subtask-label">c) Der Preis für die Butter steigt um 15 %. Wie viel kosten dann 250 g Butter? Berechnen Sie.</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <p style="font-size:0.92rem;color:#555;margin-bottom:10px;">
+            Hinweis: 250 g Butter kosten aktuell 3,00 €.
+        </p>
+        <div class="work-area">
+            <label>Lösungsweg / Rechnung:</label>
+            <textarea id="work7c" rows="3" placeholder="z.B. 3,00 € × 1,15 = ..."></textarea>
+        </div>
+        <div class="input-row">
+            <label>Neuer Preis (250 g Butter):</label>
+            <input type="text" id="in7c" placeholder="?"> €
+        </div>
+        <button class="submit-btn" id="btn7c" onclick="submit7c()">Antwort prüfen</button>
+        <div class="feedback" id="fb7c"></div>
+    </div>
+
+    <!-- 7d* -->
+    <div class="subtask star-task" id="sub7d">
+        <div class="subtask-header">
+            <div class="subtask-label">d)* Ein Bäcker hat noch sehr viel Mehl und Schokolade, aber nur noch 2 kg Butter und 30 Eier. Wie viele Schokoladenkuchen kann er höchstens noch backen? Geben Sie an und begründen Sie.</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <p style="font-size:0.92rem;color:#555;margin-bottom:10px;">
+            Hinweis: Pro Kuchen werden 100 g Butter und 3 Eier benötigt.
+            Berechnen Sie, wie viele Kuchen mit der verfügbaren Butter bzw. den Eiern möglich sind, und entscheiden Sie, welche Zutat die Begrenzung ist.
+        </p>
+
+        <!-- Step-by-step calculation helper -->
+        <div style="background:#f5f5f5;border-radius:6px;padding:12px;margin-bottom:12px;">
+            <p style="font-weight:bold;margin-bottom:8px;">Hilfstabelle:</p>
+            <table style="max-width:400px;">
+                <thead>
+                    <tr><th>Zutat</th><th>Vorrat</th><th>Pro Kuchen</th><th>Mögliche Kuchen</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Butter</td>
+                        <td>2 kg = 2000 g</td>
+                        <td>100 g</td>
+                        <td><input type="text" id="d7d_butter" placeholder="?"> Kuchen</td>
+                    </tr>
+                    <tr>
+                        <td>Eier</td>
+                        <td>30 Stück</td>
+                        <td>3 Stück</td>
+                        <td><input type="text" id="d7d_eier" placeholder="?"> Kuchen</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="input-row">
+            <label>Höchstens mögliche Kuchen:</label>
+            <input type="text" id="in7d" placeholder="?"> Kuchen
+        </div>
+        <div class="work-area" style="margin-top:10px;">
+            <label>Begründung (welche Zutat begrenzt und warum):</label>
+            <textarea id="work7d" rows="3" placeholder="Die begrenzende Zutat ist ... weil ..."></textarea>
+        </div>
+        <button class="submit-btn" id="btn7d" onclick="submit7d()">Antwort prüfen</button>
+        <div class="feedback" id="fb7d"></div>
+    </div>
+
+    <div class="nav-footer">
+        <a href="aufgabe6.html">← Aufgabe 6</a>
+        <a href="index.html">🏠 Zur Übersicht</a>
+    </div>
+</div>
+
+<script src="exam.js"></script>
+<script>
+
+// ── helper ──────────────────────────────────────────────
+function saveFb(id, fbId, btnId, correct, firstTry, pts, msg) {
+    const ts       = getTaskState(id);
+    const earned   = firstTry && correct ? pts : (ts.points || 0);
+    const badge    = correct && earned > 0
+        ? ` <span class="points-earned">+${earned} Punkt${earned !== 1 ? 'e' : ''}</span>`
+        : '';
+    const fbText   = (correct ? '✓ ' : '✗ ') + msg + badge;
+    setTaskState(id, { submitted: true, correct, points: earned, feedbackText: fbText });
+    const fbEl     = document.getElementById(fbId);
+    fbEl.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fbEl.innerHTML = fbText;
+    fbEl.style.display = 'block';
+    if (correct) {
+        const btn = document.getElementById(btnId);
+        if (btn) btn.disabled = true;
+    }
+}
+
+// ── 7a ──────────────────────────────────────────────────
+// 200 g → 1,60 €   →   1000 g → 8,00 €
+function submit7a() {
+    const ts       = getTaskState('A7a');
+    const firstTry = !ts.submitted;
+    const val      = parseGerman(document.getElementById('in7a').value);
+    const correct  = approxEqual(val, 8.00, 0.01);
+    const msg = correct
+        ? 'Richtig! 200 g kosten 1,60 €, also kostet 1 kg (= 1000 g = 5 × 200 g) ' +
+          '5 × 1,60 € = 8,00 €.'
+        : 'Nicht korrekt. Tipp: Berechnen Sie zuerst den Preis für 1 g ' +
+          '(1,60 € ÷ 200) und multiplizieren Sie dann mit 1000.';
+    saveFb('A7a', 'fb7a', 'btn7a', correct, firstTry, correct && firstTry ? 1 : 0, msg);
+}
+
+// ── 7b* ─────────────────────────────────────────────────
+// Mehl:      250 g  →  0,80 € / 1000 g  × 250  =  0,20 €
+// Butter:    100 g  →  3,00 € / 250 g   × 100  =  1,20 €
+// Eier:      3 St.  →  2,40 € / 6 St.   × 3    =  1,20 €
+// Schokolade:100 g  →  1,60 € / 200 g   × 100  =  0,80 €
+// Gesamt                                         =  3,40 €
+function submit7b() {
+    const ts       = getTaskState('A7b');
+    const firstTry = !ts.submitted;
+
+    const mehl   = parseGerman(document.getElementById('cost_mehl').value);
+    const butter = parseGerman(document.getElementById('cost_butter').value);
+    const eier   = parseGerman(document.getElementById('cost_eier').value);
+    const schoko = parseGerman(document.getElementById('cost_schoko').value);
+    const total  = parseGerman(document.getElementById('in7b').value);
+
+    const mehlOk   = approxEqual(mehl,   0.20, 0.01);
+    const butterOk = approxEqual(butter, 1.20, 0.01);
+    const eierOk   = approxEqual(eier,   1.20, 0.01);
+    const schokoOk = approxEqual(schoko, 0.80, 0.01);
+    const totalOk  = approxEqual(total,  3.40, 0.02);
+
+    const allCorrect = mehlOk && butterOk && eierOk && schokoOk && totalOk;
+
+    let msg;
+    if (allCorrect) {
+        msg = 'Richtig! Mehl: 0,20 € | Butter: 1,20 € | Eier: 1,20 € | ' +
+              'Schokolade: 0,80 € → Gesamt: 3,40 €';
+    } else {
+        const hints = [];
+        if (!mehlOk)
+            hints.push('Mehl: 250 g × (0,80 € ÷ 1000 g) = 0,20 €');
+        if (!butterOk)
+            hints.push('Butter: 100 g × (3,00 € ÷ 250 g) = 1,20 €');
+        if (!eierOk)
+            hints.push('Eier: 3 × (2,40 € ÷ 6) = 1,20 €');
+        if (!schokoOk)
+            hints.push('Schokolade: 100 g × (1,60 € ÷ 200 g) = 0,80 €');
+        if (!totalOk && hints.length === 0)
+            hints.push('Prüfen Sie die Summe aller Einzelkosten.');
+        msg = 'Nicht alle Werte korrekt. Hinweise: ' + hints.join(' | ');
+    }
+
+    saveFb('A7b', 'fb7b', 'btn7b', allCorrect, firstTry,
+           allCorrect && firstTry ? 3 : 0, msg);
+}
+
+// ── 7c ──────────────────────────────────────────────────
+// 3,00 € × 1,15 = 3,45 €
+function submit7c() {
+    const ts       = getTaskState('A7c');
+    const firstTry = !ts.submitted;
+    const val      = parseGerman(document.getElementById('in7c').value);
+    const correct  = approxEqual(val, 3.45, 0.01);
+    const msg = correct
+        ? 'Richtig! 3,00 € × 1,15 = 3,45 €  ' +
+          '(oder: 15 % von 3,00 € = 0,45 €  →  3,00 + 0,45 = 3,45 €)'
+        : 'Nicht korrekt. Tipp: Berechnen Sie 15 % von 3,00 € und addieren ' +
+          'Sie diesen Betrag zum ursprünglichen Preis.';
+    saveFb('A7c', 'fb7c', 'btn7c', correct, firstTry, correct && firstTry ? 2 : 0, msg);
+}
+
+// ── 7d* ─────────────────────────────────────────────────
+// Butter: 2000 g ÷ 100 g = 20 Kuchen
+// Eier:   30    ÷ 3      = 10 Kuchen   ← begrenzend
+// Antwort: 10 Kuchen
+function submit7d() {
+    const ts       = getTaskState('A7d');
+    const firstTry = !ts.submitted;
+
+    const butterCakes = parseInt(document.getElementById('d7d_butter').value);
+    const eierCakes   = parseInt(document.getElementById('d7d_eier').value);
+    const answer      = parseInt(document.getElementById('in7d').value);
+
+    const butterOk = butterCakes === 20;
+    const eierOk   = eierCakes   === 10;
+    const answerOk = answer      === 10;
+
+    const correct = butterOk && eierOk && answerOk;
+
+    let msg;
+    if (correct) {
+        msg = 'Richtig! Butter reicht für 2000 g ÷ 100 g = 20 Kuchen. ' +
+              'Eier reichen für 30 ÷ 3 = 10 Kuchen. ' +
+              'Die Eier sind die begrenzende Zutat → höchstens 10 Kuchen.';
+    } else {
+        const hints = [];
+        if (!butterOk)
+            hints.push('Butter: 2 kg = 2000 g, pro Kuchen 100 g → 2000 ÷ 100 = ? Kuchen');
+        if (!eierOk)
+            hints.push('Eier: 30 Stück, pro Kuchen 3 → 30 ÷ 3 = ? Kuchen');
+        if (butterOk && eierOk && !answerOk)
+            hints.push('Der Bäcker kann nur so viele Kuchen backen, wie die ' +
+                       'knappste Zutat erlaubt. Welcher Wert ist kleiner?');
+        msg = 'Nicht korrekt. Hinweise: ' + hints.join(' | ');
+    }
+
+    saveFb('A7d', 'fb7d', 'btn7d', correct, firstTry,
+           correct && firstTry ? 2 : 0, msg);
+}
+
+// ── Restore saved state on page load ────────────────────
+(function restoreAll() {
+    // Simple restore for feedback + button disable
+    [
+        ['A7a', 'fb7a', 'btn7a'],
+        ['A7b', 'fb7b', 'btn7b'],
+        ['A7c', 'fb7c', 'btn7c'],
+        ['A7d', 'fb7d', 'btn7d'],
+    ].forEach(([id, fb, btn]) => {
+        const ts = getTaskState(id);
+        if (!ts.submitted) return;
+        const fbEl = document.getElementById(fb);
+        if (fbEl) {
+            fbEl.className   = 'feedback ' + (ts.correct ? 'correct' : 'incorrect');
+            fbEl.innerHTML   = ts.feedbackText || '';
+            fbEl.style.display = 'block';
+        }
+        if (ts.correct) {
+            const b = document.getElementById(btn);
+            if (b) b.disabled = true;
+        }
+    });
+
+    // Pre-fill correct individual costs for 7b if already solved
+    const ts7b = getTaskState('A7b');
+    if (ts7b.submitted && ts7b.correct) {
+        document.getElementById('cost_mehl').value   = '0,20';
+        document.getElementById('cost_butter').value = '1,20';
+        document.getElementById('cost_eier').value   = '1,20';
+        document.getElementById('cost_schoko').value = '0,80';
+        document.getElementById('in7b').value        = '3,40';
+    }
+
+    // Pre-fill correct helper table for 7d if already solved
+    const ts7d = getTaskState('A7d');
+    if (ts7d.submitted && ts7d.correct) {
+        document.getElementById('d7d_butter').value = '20';
+        document.getElementById('d7d_eier').value   = '10';
+        document.getElementById('in7d').value       = '10';
+    }
+})();
+</script>
+</body>
+</html>

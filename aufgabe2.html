@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgabe 2 – Elektroautos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-header">
+    <a href="index.html" class="back-btn">← Übersicht</a>
+    <h2>Vergleichende Arbeit Mathematik 2023</h2>
+</div>
+<div class="task-page">
+    <div class="task-title">
+        Aufgabe 2: Elektroautos
+        <span class="pts-badge">7 Punkte</span>
+    </div>
+    <p style="margin-bottom:16px;">Ein Autohändler verkauft 5 verschiedene Modelle von Elektroautos. Für die Verkäufe im letzten Monat hat er eine Tabelle angefertigt.</p>
+
+    <table>
+        <thead>
+            <tr><th>Hersteller</th><th>Modell</th><th>Preis</th><th>Anzahl verkauft</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Volkswagen</td><td>ID 3</td><td>45.000 €</td><td>9</td></tr>
+            <tr><td>Renault</td><td>Zoe</td><td>37.000 €</td><td>4</td></tr>
+            <tr><td>Kia</td><td>E-Niro</td><td>49.000 €</td><td>1</td></tr>
+            <tr><td>Fiat</td><td>500 E</td><td>31.000 €</td><td>8</td></tr>
+            <tr><td>Volkswagen</td><td>ID 4</td><td>48.000 €</td><td>3</td></tr>
+        </tbody>
+    </table>
+
+    <!-- 2a -->
+    <div class="subtask" id="sub2a">
+        <div class="subtask-header">
+            <div class="subtask-label">a) Wie viel Prozent der verkauften Autos waren vom Hersteller Volkswagen? Berechnen Sie.</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <div class="work-area">
+            <label>Lösungsweg / Rechnung:</label>
+            <textarea id="work2a" rows="3" placeholder="Schreiben Sie Ihren Rechenweg hier..."></textarea>
+        </div>
+        <div class="input-row">
+            <label>Anteil Volkswagen:</label>
+            <input type="text" id="in2a" placeholder="z.B. 48"> %
+        </div>
+        <button class="submit-btn" id="btn2a" onclick="submit2a()">Antwort prüfen</button>
+        <div class="feedback" id="fb2a"></div>
+    </div>
+
+    <!-- 2b -->
+    <div class="subtask" id="sub2b">
+        <div class="subtask-header">
+            <div class="subtask-label">b) Im nächsten Monat wird der Preis für einen Kia E-Niro um 8% gesenkt. Wie viel kostet der Kia E-Niro nach der Preissenkung?</div>
+            <div class="subtask-pts">(2 P)</div>
+        </div>
+        <div class="work-area">
+            <label>Lösungsweg / Rechnung:</label>
+            <textarea id="work2b" rows="3" placeholder="Schreiben Sie Ihren Rechenweg hier..."></textarea>
+        </div>
+        <div class="input-row">
+            <label>Neuer Preis:</label>
+            <input type="text" id="in2b" placeholder="z.B. 45000"> €
+        </div>
+        <button class="submit-btn" id="btn2b" onclick="submit2b()">Antwort prüfen</button>
+        <div class="feedback" id="fb2b"></div>
+    </div>
+
+    <!-- 2c* -->
+    <div class="subtask star-task" id="sub2c">
+        <div class="subtask-header">
+            <div class="subtask-label">c)* Wie hoch ist der durchschnittliche Preis der fünf Elektroautos aus der Tabelle? Berechnen Sie.</div>
+            <div class="subtask-pts">(3 P)</div>
+        </div>
+        <div class="work-area">
+            <label>Lösungsweg / Rechnung:</label>
+            <textarea id="work2c" rows="4" placeholder="Schreiben Sie Ihren Rechenweg hier..."></textarea>
+        </div>
+        <div class="input-row">
+            <label>Durchschnittlicher Preis:</label>
+            <input type="text" id="in2c" placeholder="z.B. 42000"> €
+        </div>
+        <button class="submit-btn" id="btn2c" onclick="submit2c()">Antwort prüfen</button>
+        <div class="feedback" id="fb2c"></div>
+    </div>
+
+    <div class="nav-footer">
+        <a href="aufgabe1.html">← Aufgabe 1</a>
+        <a href="aufgabe3.html">Aufgabe 3 →</a>
+    </div>
+</div>
+<script src="exam.js"></script>
+<script>
+function submit2a() {
+    const ts = getTaskState('A2a');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in2a').value);
+    // VW: ID3=9, ID4=3 → 12 total; all=9+4+1+8+3=25; 12/25=48%
+    const correct = approxEqual(val, 48, 0.5);
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! VW-Autos: 9+3=12, Gesamt: 25. Anteil: 12/25 × 100 = 48 %';
+        if (firstTry) pts = 2;
+        document.getElementById('btn2a').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Zählen Sie alle VW-Autos (ID3 + ID4) und teilen Sie durch die Gesamtzahl aller verkauften Autos.';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkte</span>` : '');
+    setTaskState('A2a', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb2a');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+function submit2b() {
+    const ts = getTaskState('A2b');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in2b').value);
+    // 49000 × 0.92 = 45080
+    const correct = approxEqual(val, 45080, 10);
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! 49.000 € × (1 – 0,08) = 49.000 × 0,92 = 45.080 €';
+        if (firstTry) pts = 2;
+        document.getElementById('btn2b').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Berechnen Sie 8% von 49.000 € und ziehen Sie diesen Betrag ab.';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkte</span>` : '');
+    setTaskState('A2b', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb2b');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+function submit2c() {
+    const ts = getTaskState('A2c');
+    const firstTry = !ts.submitted;
+    const val = parseGerman(document.getElementById('in2c').value);
+    // (45000+37000+49000+31000+48000)/5 = 210000/5 = 42000
+    const correct = approxEqual(val, 42000, 10);
+    let msg, pts = 0;
+    if (correct) {
+        msg = 'Richtig! (45.000 + 37.000 + 49.000 + 31.000 + 48.000) / 5 = 210.000 / 5 = 42.000 €';
+        if (firstTry) pts = 3;
+        document.getElementById('btn2c').disabled = true;
+    } else {
+        msg = 'Nicht korrekt. Tipp: Addieren Sie alle 5 Preise und teilen Sie durch 5 (Anzahl der Modelle).';
+    }
+    const fbText = (correct ? '✓ ' : '✗ ') + msg + (correct && pts > 0 ? ` <span class="points-earned">+${pts} Punkte</span>` : '');
+    setTaskState('A2c', { submitted: true, correct, points: firstTry && correct ? pts : (ts.points || 0), feedbackText: fbText });
+    const fb = document.getElementById('fb2c');
+    fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+    fb.innerHTML = fbText;
+    fb.style.display = 'block';
+}
+
+// Restore
+(function() {
+    [['A2a','fb2a','btn2a'],['A2b','fb2b','btn2b'],['A2c','fb2c','btn2c']].forEach(([id,fb,btn]) => {
+        const ts = getTaskState(id);
+        if (ts.submitted) {
+            const fbEl = document.getElementById(fb);
+            if (fbEl) { fbEl.className='feedback '+(ts.correct?'correct':'incorrect'); fbEl.innerHTML=ts.feedbackText||''; fbEl.style.display='block'; }
+            if (ts.correct) { const b=document.getElementById(btn); if(b) b.disabled=true; }
+        }
+    });
+})();
+</script>
+</body>
+</html>
